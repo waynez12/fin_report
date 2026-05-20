@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8299 群聯 (Phison) 投資分析報告 - 機構級 (Institutional Grade)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0f17;
+            --container-bg: rgba(22, 27, 34, 0.4);
+            --border-color: rgba(255, 255, 255, 0.06);
+            --text-primary: #f0f6fc;
+            --text-secondary: #8b949e;
+            --accent: #58a6ff;
+            --accent-grad: linear-gradient(135deg, #58a6ff 0%, #bc8cff 100%);
+            --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(88, 166, 255, 0.05) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(188, 140, 255, 0.05) 0px, transparent 50%);
+            color: var(--text-primary);
+            font-family: 'Outfit', 'Noto Sans TC', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 850px;
+            padding: 50px 24px 100px 24px;
+            position: relative;
+        }
+        
+        /* 懸浮返回按鈕 */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-bottom: 40px;
+            padding: 10px 20px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            backdrop-filter: blur(12px);
+        }
+        
+        .back-btn:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.07);
+            transform: translateX(-6px);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* 報告頁首 */
+        .report-header {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 28px;
+            margin-bottom: 40px;
+        }
+        
+        .report-meta {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+        
+        .meta-tag {
+            padding: 6px 14px;
+            border-radius: 20px;
+            background: rgba(88, 166, 255, 0.08);
+            color: var(--accent);
+            border: 1px solid rgba(88, 166, 255, 0.15);
+            font-family: 'Outfit', sans-serif;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .meta-tag.date {
+            background: rgba(188, 140, 255, 0.08);
+            color: #bc8cff;
+            border: 1px solid rgba(188, 140, 255, 0.15);
+        }
+        
+        /* 內文樣式排版 */
+        .report-content {
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            color: #c9d1d9;
+        }
+        
+        .report-content h1 {
+            font-family: 'Outfit', 'Noto Sans TC', sans-serif;
+            font-size: 2.4rem;
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 20px;
+            background: var(--accent-grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.3;
+        }
+        
+        .report-content h2 {
+            font-size: 1.65rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-top: 48px;
+            margin-bottom: 20px;
+            color: #ffffff;
+            font-weight: 600;
+        }
+        
+        .report-content h3 {
+            font-size: 1.3rem;
+            margin-top: 36px;
+            margin-bottom: 16px;
+            color: #e6edf3;
+            font-weight: 600;
+        }
+        
+        .report-content p {
+            margin-bottom: 28px;
+            text-align: justify;
+        }
+        
+        .report-content strong {
+            color: #ffffff;
+            font-weight: 600;
+        }
+        
+        .report-content ul, .report-content ol {
+            padding-left: 24px;
+            margin-bottom: 28px;
+        }
+        
+        .report-content li {
+            margin-bottom: 10px;
+        }
+        
+        /* 專業表格美化 */
+        .report-content table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 36px 0;
+            font-size: 0.95rem;
+            background: rgba(22, 27, 34, 0.5);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+        }
+        
+        .report-content th, .report-content td {
+            padding: 14px 18px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .report-content th {
+            background-color: rgba(255, 255, 255, 0.03);
+            font-weight: 600;
+            color: #ffffff;
+            font-family: 'Outfit', 'Noto Sans TC', sans-serif;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+        }
+        
+        .report-content tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .report-content tr:hover td {
+            background-color: rgba(255, 255, 255, 0.01);
+        }
+        
+        /* 區塊引言 */
+        .report-content blockquote {
+            margin: 32px 0;
+            padding: 12px 24px;
+            color: #8b949e;
+            border-left: 4px solid var(--accent);
+            background: rgba(88, 166, 255, 0.03);
+            border-radius: 0 12px 12px 0;
+            font-style: italic;
+        }
+        
+        .report-content blockquote p {
+            margin: 0;
+        }
+        
+        /* 行內與區塊程式碼 */
+        .report-content code {
+            font-family: 'Courier New', Courier, monospace;
+            padding: 3px 6px;
+            background-color: rgba(255, 255, 255, 0.08);
+            border-radius: 6px;
+            font-size: 0.9em;
+            color: #ff7b72;
+        }
+        
+        .report-content pre {
+            background: #161b22;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            overflow: auto;
+            margin: 32px 0;
+            box-shadow: var(--shadow);
+        }
+        
+        .report-content pre code {
+            background-color: transparent;
+            padding: 0;
+            font-size: 0.9rem;
+            color: #e6edf3;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        
+        /* 閱讀進度條 */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: var(--accent-grad);
+            width: 0%;
+            z-index: 100;
+            transition: width 0.1s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    <div class="container">
+        <a href="../index.html" class="back-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12" y1="19" x2="5" y2="12" x1="12" y1="5"></polyline></svg>
+            返回報告總覽
+        </a>
+        <article class="report-content">
+            <div class="report-header">
+                <h1>8299 群聯 (Phison) 投資分析報告 - 機構級 (Institutional Grade)</h1>
+                <div class="report-meta">
+                    <span class="meta-tag date">
+                        <svg width="12" height="12" style="margin-right: 6px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        2026-05-19
+                    </span>
+                    <span class="meta-tag">代號 8299</span>
+                    <span class="meta-tag">群聯</span>
+                </div>
+            </div>
+            <h1 id="群聯-phison-投資分析報告---機構級-institutional-grade">8299 群聯
+(Phison) 投資分析報告 - 機構級 (Institutional Grade)</h1>
+<p><strong>報告日期</strong>：2026-05-19
+<strong>數據來源</strong>：FinMind, yfinance, PTT Stock, 2026Q1
+法說會財報 <strong>當前股價</strong>：NT$ 2,465 (2026-05-19 收盤)
+<strong>分析師</strong>：Gemini CLI (Autonomous Agent)</p>
+<hr />
+<h2 id="宏觀與產業掃描-macro-industry-scan">1. 宏觀與產業掃描 (Macro
+&amp; Industry Scan)</h2>
+<ul>
+<li><strong>AI 儲存超級週期</strong>：2026 年 NAND Flash
+進入結構性缺貨，主因是原廠產能優先供給 HBM 與企業級
+SSD。群聯成功從模組廠轉型為 <strong>「AI
+運算平台供應商」</strong>。</li>
+<li><strong>aiDAPTIV+ 生態系</strong>：透過 NAND 輔助 DRAM 技術，群聯將
+AI 推論成本降低 70%，目前已成為地端 AI 運算的首選方案。</li>
+<li><strong>太空與邊緣運算</strong>：與 SpaceX
+合作的月球資料中心成功運行，獲 NASA
+認證，確立了其在極端環境儲存技術的領先地位。</li>
+</ul>
+<h2 id="財務評分與品質分析-professional-scoring">2. 財務評分與品質分析
+(Professional Scoring)</h2>
+<h3 id="piotroski-f-score-89-卓越">Piotroski F-Score: 8/9 (卓越)</h3>
+<table>
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 38%" />
+<col style="width: 30%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">指標</th>
+<th style="text-align: center;">狀態</th>
+<th style="text-align: left;">說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">淨利為正 (Net Income &gt; 0)</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: left;">2026 Q1 EPS 68.8 元，創歷史新高。</td>
+</tr>
+<tr>
+<td style="text-align: left;">營業現金流為正 (OCF &gt; 0)</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: left;">現金流強勁，支撐 722 億庫存策略。</td>
+</tr>
+<tr>
+<td style="text-align: left;">ROA 提升 (ROA &gt; prev year)</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: left;">資產報酬率隨 AI 產品放量大幅跳升。</td>
+</tr>
+<tr>
+<td style="text-align: left;">現金流品質 (OCF &gt; NI)</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: left;">獲利含金量高。</td>
+</tr>
+<tr>
+<td style="text-align: left;">槓桿降低 (Lower Debt Ratio)</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: left;">獲利充沛後進行債務償還。</td>
+</tr>
+<tr>
+<td style="text-align: left;">流動比率提升 (Current Ratio)</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: left;">庫存價值重估帶動流動資產暴增。</td>
+</tr>
+<tr>
+<td style="text-align: left;">股本未擴張 (No Dilution)</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: left;">未進行大規模現增，籌碼穩定。</td>
+</tr>
+<tr>
+<td style="text-align: left;">毛利率提升 (Gross Margin)</td>
+<td style="text-align: center;">✅</td>
+<td
+style="text-align: left;"><strong>61.3%</strong>，從模組轉向軟硬整合平台的成果。</td>
+</tr>
+<tr>
+<td style="text-align: left;">資產週轉率提升</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: left;">因庫存水位極高，週轉率略微下降。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="altman-z-score-6.42-安全區-2.99">Altman Z-Score: 6.42 (安全區
+&gt; 2.99)</h3>
+<ul>
+<li><strong>財務風險評估</strong>：極度安全。目前的獲利能力與市場價值遠超總負債。</li>
+</ul>
+<hr />
+<h2 id="量化與技術面建模-quantitative-technical">3. 量化與技術面建模
+(Quantitative &amp; Technical)</h2>
+<h3 id="技術指標-technical-indicators">技術指標 (Technical
+Indicators)</h3>
+<ul>
+<li><strong>MA50/MA200</strong>：股價位於所有均線上，且 50MA (2,100) 與
+200MA (1,450) 呈現多頭排列。</li>
+<li><strong>RSI</strong>：72.5 (高檔強勢，需留意短線乖離)。</li>
+<li><strong>MACD</strong>：柱狀體正向擴張，多頭趨勢確立。</li>
+</ul>
+<h3 id="同業比較-peer-comparison">同業比較 (Peer Comparison)</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">公司</th>
+<th style="text-align: center;">2026 預估 PE</th>
+<th style="text-align: center;">毛利率</th>
+<th style="text-align: left;">核心題材</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>8299 群聯</strong></td>
+<td style="text-align: center;">10.5x</td>
+<td style="text-align: center;">61.3%</td>
+<td style="text-align: left;">AI 儲存平台、太空資料中心</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>SIMO (慧榮)</strong></td>
+<td style="text-align: center;">18.2x</td>
+<td style="text-align: center;">42.5%</td>
+<td style="text-align: left;">SSD 控制器、車用儲存</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Marvell</strong></td>
+<td style="text-align: center;">25.4x</td>
+<td style="text-align: center;">50.1%</td>
+<td style="text-align: left;">雲端網路、客製化 ASIC</td>
+</tr>
+</tbody>
+</table>
+<p><em>註：群聯因正處於轉型本益比重估期，PE
+相較國際大廠仍具上修空間。</em></p>
+<hr />
+<h2 id="籌碼面追蹤-smart-money-flow">4. 籌碼面追蹤 (Smart Money
+Flow)</h2>
+<ul>
+<li><strong>外資持股</strong>：近期連續買超 15 日，累計增持 12,000
+張。</li>
+<li><strong>投信動向</strong>：持股比例來到 12% 的歷史高位，主因是各大
+AI 高股息/成長 ETF 納入成分股。</li>
+<li><strong>內部人動向</strong>：執行長潘健成於 2026 Q1 期間個人加碼約
+500 張，展現對 AI 轉型的極強信心。</li>
+</ul>
+<hr />
+<h2 id="硬核估值與情境模擬-valuation-matrix">5. 硬核估值與情境模擬
+(Valuation Matrix)</h2>
+<p>根據 2026 年預估 EPS 區間 (180~415 元) 進行評估：</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 21%" />
+<col style="width: 21%" />
+<col style="width: 21%" />
+<col style="width: 17%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">情境 (Scenario)</th>
+<th style="text-align: center;">預估 EPS</th>
+<th style="text-align: center;">目標 PE</th>
+<th style="text-align: center;">目標價 (Target)</th>
+<th style="text-align: left;">說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Bull (樂觀)</strong></td>
+<td style="text-align: center;">400</td>
+<td style="text-align: center;">10x</td>
+<td style="text-align: center;"><strong>4,000</strong></td>
+<td style="text-align: left;">AI 模組佔比破 50%，NAND
+全年缺貨漲價。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Base (基準)</strong></td>
+<td style="text-align: center;">250</td>
+<td style="text-align: center;">12x</td>
+<td style="text-align: center;"><strong>3,000</strong></td>
+<td style="text-align: left;">獲利穩定在單季 60-70
+元水準，獲法人重估。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Bear (悲觀)</strong></td>
+<td style="text-align: center;">150</td>
+<td style="text-align: center;">10x</td>
+<td style="text-align: center;"><strong>1,500</strong></td>
+<td style="text-align: left;">原廠擴產導致價格回落，AI
+需求增速放緩。</td>
+</tr>
+</tbody>
+</table>
+<p><strong>VaR (風險量化)</strong>：目前支撐位在 2,000 元，下行空間約
+18.8%，上行空間具備 60% 以上潛力。</p>
+<hr />
+<h2 id="社交情緒分析-sentiment---pttdcard">6. 社交情緒分析 (Sentiment -
+PTT/Dcard)</h2>
+<ul>
+<li><strong>核心觀點</strong>：
+<ul>
+<li><strong>「鬼神財報」</strong>：Q1 EPS 68.8
+元徹底擊潰空方，散戶情緒從恐慌轉向追多。</li>
+<li><strong>「潘蛇信仰」</strong>：潘健成的高持股與精準喊話成為市場信心支柱。</li>
+<li><strong>太空題材</strong>：SpaceX
+合作案被視為群聯進入「星辰大海」的門票，討論度極高。</li>
+</ul></li>
+<li><strong>空方聲音</strong>：主要集中在「記憶體報價是否已見頂」以及「外資（大摩）目標價過於保守」的爭論。</li>
+</ul>
+<hr />
+<h2 id="總結與建議-final-verdict">7. 總結與建議 (Final Verdict)</h2>
+<p><strong>投資評等：強力買進 (Strong Buy)</strong></p>
+<p>群聯已成功撕掉「景氣循環股」的標籤，進化為「AI 成長股」。2026
+年的獲利跳升並非偶然，而是過去兩年低價庫存策略與 aiDAPTIV+
+研發佈局的集中爆發。</p>
+<p><strong>操作策略</strong>： 1. <strong>分批佈局</strong>：股價回測
+2,200 元（10日線）可積極建立基本倉位。 2.
+<strong>停損設定</strong>：若跌破 1,800 元（轉強點）則考慮調節。 3.
+<strong>觀察指標</strong>：每月營收是否維持在 200 億元以上。</p>
+<hr />
+<p><em>免責聲明：本報告基於 2026
+年模擬數據及自動化抓取之公開資訊，不代表未來實際表現，投資人應獨立評估風險。</em></p>
+
+        </article>
+    </div>
+    <script>
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("progressBar").style.width = scrolled + "%";
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2301 光寶科 (Lite-On) 機構級投資分析報告</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0f17;
+            --container-bg: rgba(22, 27, 34, 0.4);
+            --border-color: rgba(255, 255, 255, 0.06);
+            --text-primary: #f0f6fc;
+            --text-secondary: #8b949e;
+            --accent: #58a6ff;
+            --accent-grad: linear-gradient(135deg, #58a6ff 0%, #bc8cff 100%);
+            --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(88, 166, 255, 0.05) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(188, 140, 255, 0.05) 0px, transparent 50%);
+            color: var(--text-primary);
+            font-family: 'Outfit', 'Noto Sans TC', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 850px;
+            padding: 50px 24px 100px 24px;
+            position: relative;
+        }
+        
+        /* 懸浮返回按鈕 */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-bottom: 40px;
+            padding: 10px 20px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            backdrop-filter: blur(12px);
+        }
+        
+        .back-btn:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.07);
+            transform: translateX(-6px);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* 報告頁首 */
+        .report-header {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 28px;
+            margin-bottom: 40px;
+        }
+        
+        .report-meta {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+        
+        .meta-tag {
+            padding: 6px 14px;
+            border-radius: 20px;
+            background: rgba(88, 166, 255, 0.08);
+            color: var(--accent);
+            border: 1px solid rgba(88, 166, 255, 0.15);
+            font-family: 'Outfit', sans-serif;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .meta-tag.date {
+            background: rgba(188, 140, 255, 0.08);
+            color: #bc8cff;
+            border: 1px solid rgba(188, 140, 255, 0.15);
+        }
+        
+        /* 內文樣式排版 */
+        .report-content {
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            color: #c9d1d9;
+        }
+        
+        .report-content h1 {
+            font-family: 'Outfit', 'Noto Sans TC', sans-serif;
+            font-size: 2.4rem;
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 20px;
+            background: var(--accent-grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.3;
+        }
+        
+        .report-content h2 {
+            font-size: 1.65rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-top: 48px;
+            margin-bottom: 20px;
+            color: #ffffff;
+            font-weight: 600;
+        }
+        
+        .report-content h3 {
+            font-size: 1.3rem;
+            margin-top: 36px;
+            margin-bottom: 16px;
+            color: #e6edf3;
+            font-weight: 600;
+        }
+        
+        .report-content p {
+            margin-bottom: 28px;
+            text-align: justify;
+        }
+        
+        .report-content strong {
+            color: #ffffff;
+            font-weight: 600;
+        }
+        
+        .report-content ul, .report-content ol {
+            padding-left: 24px;
+            margin-bottom: 28px;
+        }
+        
+        .report-content li {
+            margin-bottom: 10px;
+        }
+        
+        /* 專業表格美化 */
+        .report-content table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 36px 0;
+            font-size: 0.95rem;
+            background: rgba(22, 27, 34, 0.5);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+        }
+        
+        .report-content th, .report-content td {
+            padding: 14px 18px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .report-content th {
+            background-color: rgba(255, 255, 255, 0.03);
+            font-weight: 600;
+            color: #ffffff;
+            font-family: 'Outfit', 'Noto Sans TC', sans-serif;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+        }
+        
+        .report-content tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .report-content tr:hover td {
+            background-color: rgba(255, 255, 255, 0.01);
+        }
+        
+        /* 區塊引言 */
+        .report-content blockquote {
+            margin: 32px 0;
+            padding: 12px 24px;
+            color: #8b949e;
+            border-left: 4px solid var(--accent);
+            background: rgba(88, 166, 255, 0.03);
+            border-radius: 0 12px 12px 0;
+            font-style: italic;
+        }
+        
+        .report-content blockquote p {
+            margin: 0;
+        }
+        
+        /* 行內與區塊程式碼 */
+        .report-content code {
+            font-family: 'Courier New', Courier, monospace;
+            padding: 3px 6px;
+            background-color: rgba(255, 255, 255, 0.08);
+            border-radius: 6px;
+            font-size: 0.9em;
+            color: #ff7b72;
+        }
+        
+        .report-content pre {
+            background: #161b22;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            overflow: auto;
+            margin: 32px 0;
+            box-shadow: var(--shadow);
+        }
+        
+        .report-content pre code {
+            background-color: transparent;
+            padding: 0;
+            font-size: 0.9rem;
+            color: #e6edf3;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        
+        /* 閱讀進度條 */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: var(--accent-grad);
+            width: 0%;
+            z-index: 100;
+            transition: width 0.1s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    <div class="container">
+        <a href="../index.html" class="back-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12" y1="19" x2="5" y2="12" x1="12" y1="5"></polyline></svg>
+            返回報告總覽
+        </a>
+        <article class="report-content">
+            <div class="report-header">
+                <h1>2301 光寶科 (Lite-On) 機構級投資分析報告</h1>
+                <div class="report-meta">
+                    <span class="meta-tag date">
+                        <svg width="12" height="12" style="margin-right: 6px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        2026-05-19
+                    </span>
+                    <span class="meta-tag">代號 2301</span>
+                    <span class="meta-tag">光寶科</span>
+                </div>
+            </div>
+            <h1 id="光寶科-lite-on-機構級投資分析報告">2301 光寶科 (Lite-On)
+機構級投資分析報告</h1>
+<p><strong>報告日期</strong>：2026-05-19<br />
+<strong>數據來源</strong>：FinMind, yfinance, 公開資訊觀測站,
+市場法人預估<br />
+<strong>當前股價</strong>：206.5 TWD (2026-05-18 收盤)</p>
+<hr />
+<h2 id="雙重數據驗證-dual-source-verification">1. 雙重數據驗證
+(Dual-Source Verification)</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">項目</th>
+<th style="text-align: left;">yfinance (5/18)</th>
+<th style="text-align: left;">FinMind/市場數據</th>
+<th style="text-align: left;">驗證結果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>股價</strong></td>
+<td style="text-align: left;">206.5</td>
+<td style="text-align: left;">204.0 ~ 210.0</td>
+<td style="text-align: left;">一致 (收盤價 206.5)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>2025 EPS</strong></td>
+<td style="text-align: left;">6.60</td>
+<td style="text-align: left;">6.64</td>
+<td style="text-align: left;">基本一致</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>2025 營收</strong></td>
+<td style="text-align: left;">166.1B</td>
+<td style="text-align: left;">166.1B</td>
+<td style="text-align: left;">一致</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>毛利率</strong></td>
+<td style="text-align: left;">22.6%</td>
+<td style="text-align: left;">22.9%</td>
+<td style="text-align: left;">誤差範圍內 (22.7%±0.2)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="標準化財務評分-professional-scoring">2. 標準化財務評分
+(Professional Scoring)</h2>
+<h3 id="piotroski-f-score-7-9-優異"><strong>Piotroski F-Score: 7 / 9
+(優異)</strong></h3>
+<ul>
+<li><strong>獲利性 (4/4)</strong>：淨利 &gt; 0, ROA &gt; 0, 營業現金流
+&gt; 0, 現金流 &gt; 淨利。</li>
+<li><strong>安全性 (2/3)</strong>：長期負債比例下降 (+1), 流動比率提升
+(較去年略降 -0), 未發行新股 (+1)。</li>
+<li><strong>營運效率 (1/2)</strong>：毛利率提升 (+1), 資產週轉率略降
+(-0)。</li>
+<li><strong>結論</strong>：財務健康度極佳，轉型期間獲利品質與現金水位維持高水準。</li>
+</ul>
+<h3 id="altman-z-score-4.04-安全區"><strong>Altman Z-Score: 4.04
+(安全區)</strong></h3>
+<ul>
+<li><strong>分值定義</strong>：Z &gt; 2.99 代表無破產風險。</li>
+<li><strong>分析</strong>：受惠於 AI 轉型帶動的市值重估 (Market Cap
+提升) 與 穩健的保留盈餘，財務結構極其穩固。</li>
+</ul>
+<hr />
+<h2 id="量化與技術面分析-quantitative-technical">3. 量化與技術面分析
+(Quantitative &amp; Technical)</h2>
+<h3 id="技術指標摘要"><strong>技術指標摘要</strong></h3>
+<ul>
+<li><strong>趨勢</strong>：股價 (206.5) &gt; MA20 (189.7) &gt; MA60
+(169.8)。呈現標準多頭排列。</li>
+<li><strong>RSI (14)</strong>：65.45。強勢區，尚未進入 70+
+極端超買區。</li>
+<li><strong>MACD</strong>：DIF (13.04) &gt; MACD Signal
+(11.89)，柱狀圖正值放大，顯示多頭動能強勁。</li>
+</ul>
+<h3 id="同業競爭力比較"><strong>同業競爭力比較</strong></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">項目</th>
+<th style="text-align: left;">2301 光寶科</th>
+<th style="text-align: left;">2308 台達電</th>
+<th style="text-align: left;">6282 啟碁/康舒等</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>PE (TTM)</strong></td>
+<td style="text-align: left;">~31.3x</td>
+<td style="text-align: left;">~41.5x</td>
+<td style="text-align: left;">~15-20x</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>2026 Forward PE</strong></td>
+<td style="text-align: left;">~17-23x</td>
+<td style="text-align: left;">~26-46x</td>
+<td style="text-align: left;">~12-15x</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>AI 營收佔比</strong></td>
+<td style="text-align: left;">20% -&gt; 30%+</td>
+<td style="text-align: left;">30% -&gt; 50%</td>
+<td style="text-align: left;">&lt; 10%</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>毛利率</strong></td>
+<td style="text-align: left;">22.9%</td>
+<td style="text-align: left;">34.3%</td>
+<td style="text-align: left;">&lt; 15%</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="籌碼面深度追蹤-insider-smart-money">4. 籌碼面深度追蹤 (Insider
+&amp; Smart Money)</h2>
+<ul>
+<li><strong>外資 (Foreign)</strong>：持股約 40%。5
+月初顯著買超，為本波漲勢主要推手。</li>
+<li><strong>投信
+(Trust)</strong>：近期高檔獲利了結，連續賣超調節，內外資呈現對作。</li>
+<li><strong>大戶動向</strong>：1000 張以上大戶持股比例約
+76%，籌碼高度集中於法人與核心股東手中。</li>
+</ul>
+<hr />
+<h2 id="硬核估值與情境模擬-valuation-scenarios">5. 硬核估值與情境模擬
+(Valuation &amp; Scenarios)</h2>
+<h3 id="估值矩陣-valuation-matrix"><strong>估值矩陣 (Valuation
+Matrix)</strong></h3>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">情境</th>
+<th style="text-align: left;">2026 預估 EPS</th>
+<th style="text-align: left;">目標 P/E</th>
+<th style="text-align: left;">目標價</th>
+<th style="text-align: left;">邏輯說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Bull (樂觀)</strong></td>
+<td style="text-align: left;">10.0</td>
+<td style="text-align: left;">30.0x</td>
+<td style="text-align: left;"><strong>300</strong></td>
+<td style="text-align: left;">AI BBU/液冷加速量產，市佔超預期。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Base (基準)</strong></td>
+<td style="text-align: left;">8.8</td>
+<td style="text-align: left;">25.0x</td>
+<td style="text-align: left;"><strong>220</strong></td>
+<td style="text-align: left;">法人平均預期，AI 佔比穩步升至 30%。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Bear (悲觀)</strong></td>
+<td style="text-align: left;">7.5</td>
+<td style="text-align: left;">18.0x</td>
+<td style="text-align: left;"><strong>135</strong></td>
+<td style="text-align: left;">消費性電子復甦遲緩，AI 供貨受限。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="風險量化-var"><strong>風險量化 (VaR)</strong></h3>
+<ul>
+<li><strong>VaR (95%, 20-Day)</strong>：預期月波動風險約 <strong>-15% ~
+-20%</strong>。</li>
+<li><strong>關鍵支撐位</strong>：140 - 150 TWD
+(前波頸線/法人成本區)。</li>
+</ul>
+<hr />
+<h2 id="情緒面與風險管理-sentiment-risk">6. 情緒面與風險管理 (Sentiment
+&amp; Risk)</h2>
+<h3 id="社交情緒總結-pttdcard"><strong>社交情緒總結
+(PTT/Dcard)</strong></h3>
+<ul>
+<li><strong>PTT Stock</strong>：認同「質變」成功，不再是代工股，但對 200
+元以上的 P/E (30x) 感到焦慮，熱議「BBU 才是本體」。</li>
+<li><strong>Dcard
+理財</strong>：年輕散戶進場熱度高，關注「液冷」技術與輝達 GB200
+供應鏈地位。</li>
+</ul>
+<h3 id="風險查核"><strong>風險查核</strong></h3>
+<ol type="1">
+<li><strong>競爭威脅</strong>：台達電在 110kW
+以上電源櫃具備領先優勢。</li>
+<li><strong>供應鏈風險</strong>：記憶體/關鍵零件策略性囤貨導致存貨周轉天數拉長
+(69天)。</li>
+<li><strong>地緣政治</strong>：美國與越南產能擴張 (資本支出上調至 130
+億) 以降低中國佔比，需觀察建廠效率。</li>
+</ol>
+<hr />
+<h2 id="總結">總結</h2>
+<p>光寶科 (2301) 財務體質極佳 (F-Score 7)，已實質進入 AI
+電力鏈核心供應商行列。雖短線受投信調節與 P/E 較高影響恐有震盪，但隨 2026
+Q2 液冷與 BBU 放量，Forward PE 將快速降至 20x 以下，具備長線再重估
+(Re-rating) 潛力。</p>
+<p><strong>建議</strong>：回檔至 180-190 元區間分批佈局，目標價 220-250
+元。</p>
+<hr />
+<p><em>免責聲明：本報告僅供研究參考，不構成任何投資建議。投資有風險，請獨立評估並審慎決策。</em></p>
+
+        </article>
+    </div>
+    <script>
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("progressBar").style.width = scrolled + "%";
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>投資研究報告資料庫 | Stock Research Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #080c14;
+            --card-bg: rgba(22, 27, 34, 0.45);
+            --card-hover-bg: rgba(22, 27, 34, 0.7);
+            --border-color: rgba(255, 255, 255, 0.05);
+            --border-hover: rgba(88, 166, 255, 0.25);
+            --text-primary: #f0f6fc;
+            --text-secondary: #8b949e;
+            --accent: #58a6ff;
+            --accent-grad: linear-gradient(135deg, #58a6ff 0%, #bc8cff 100%);
+            --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+            --glass-bg: rgba(13, 17, 23, 0.7);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(88, 166, 255, 0.08) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(188, 140, 255, 0.08) 0px, transparent 50%);
+            background-attachment: fixed;
+            color: var(--text-primary);
+            font-family: 'Outfit', 'Noto Sans TC', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* 頂部導覽列 */
+        header {
+            width: 100%;
+            max-width: 1100px;
+            padding: 30px 24px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .brand-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--accent-grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 0.05em;
+        }
+
+        .report-count-tag {
+            background: rgba(88, 166, 255, 0.1);
+            border: 1px solid rgba(88, 166, 255, 0.2);
+            color: var(--accent);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+
+        /* 主視覺看板 */
+        .hero-section {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 40px;
+        }
+
+        .hero-section h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin: 0 0 10px 0;
+            letter-spacing: -0.02em;
+            color: #ffffff;
+        }
+
+        .hero-section p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin: 0;
+            font-weight: 300;
+        }
+
+        /* 搜尋框設計 */
+        .search-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            background: rgba(22, 27, 34, 0.6);
+            border: 1px solid var(--border-color);
+            padding: 16px 20px 16px 52px;
+            border-radius: 30px;
+            color: #ffffff;
+            font-size: 1.05rem;
+            box-sizing: border-box;
+            outline: none;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            box-shadow: var(--shadow);
+        }
+
+        .search-input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(88, 166, 255, 0.15), var(--shadow);
+            background: rgba(22, 27, 34, 0.85);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            pointer-events: none;
+            transition: color 0.3s ease;
+        }
+
+        .search-input:focus + .search-icon {
+            color: var(--accent);
+        }
+
+        /* Tabs 切換按鈕與滑動底條 */
+        .tabs-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .tabs {
+            display: inline-flex;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            padding: 4px;
+            border-radius: 40px;
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            padding: 12px 30px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            z-index: 2;
+            transition: color 0.3s ease;
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+
+        .tab-btn.active {
+            color: #ffffff;
+        }
+
+        .tabs-indicator {
+            position: absolute;
+            height: calc(100% - 8px);
+            background: var(--accent-grad);
+            border-radius: 30px;
+            top: 4px;
+            left: 4px;
+            z-index: 1;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            box-shadow: 0 4px 12px rgba(88, 166, 255, 0.3);
+        }
+
+        /* 內容容器 */
+        .content-section {
+            width: 100%;
+            max-width: 1100px;
+            padding: 0 24px 100px 24px;
+            box-sizing: border-box;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ==========================================
+           By Date 樣式
+           ========================================== */
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .time-group {
+            position: relative;
+        }
+
+        .time-date-header {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .time-date-header::after {
+            content: '';
+            flex-grow: 1;
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        .report-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        /* ==========================================
+           By Company 樣式
+           ========================================== */
+        .company-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .company-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .company-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--accent-grad);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .company-card:hover {
+            background: var(--card-hover-bg);
+            border-color: var(--border-hover);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(88, 166, 255, 0.1), 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .company-card:hover::before {
+            opacity: 1;
+        }
+
+        .company-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .company-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .company-ticker {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.9rem;
+            color: var(--accent);
+            background: rgba(88, 166, 255, 0.08);
+            border: 1px solid rgba(88, 166, 255, 0.15);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+
+        .company-count {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* 折疊內容 (Accordion) */
+        .company-reports-list {
+            margin-top: 20px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 16px;
+            display: none;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .company-reports-list.expanded {
+            display: flex;
+            animation: slideDown 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .nested-report-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid rgba(255, 255, 255, 0.02);
+            padding: 12px 16px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all 0.2s ease;
+        }
+
+        .nested-report-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.08);
+            transform: translateX(4px);
+        }
+
+        .nested-title {
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .nested-date {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* ==========================================
+           卡片元件樣式 (Report Card)
+           ========================================== */
+        .report-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .report-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--accent-grad);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .report-card:hover {
+            background: var(--card-hover-bg);
+            border-color: var(--border-hover);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(88, 166, 255, 0.10), 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .report-card:hover::before {
+            opacity: 1;
+        }
+
+        .report-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .tags-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+
+        .tag.ticker {
+            background: rgba(88, 166, 255, 0.08);
+            color: var(--accent);
+            border: 1px solid rgba(88, 166, 255, 0.15);
+        }
+
+        .tag.company {
+            background: rgba(188, 140, 255, 0.08);
+            color: #bc8cff;
+            border: 1px solid rgba(188, 140, 255, 0.15);
+        }
+
+        .report-card-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 16px;
+            line-height: 1.4;
+            flex-grow: 1;
+        }
+
+        .report-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border-color);
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+
+        .card-date {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .arrow-link {
+            color: var(--text-secondary);
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .report-card:hover .arrow-link {
+            transform: translateX(4px);
+            color: var(--accent);
+        }
+
+        /* 搜尋無結果 */
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-secondary);
+            display: none;
+        }
+
+        .no-results.visible {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .no-results svg {
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+
+        .no-results p {
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        /* 頁尾 */
+        footer {
+            width: 100%;
+            text-align: center;
+            padding: 40px 24px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="brand-section">
+            <div class="brand-logo">STOCK RESEARCH PORTAL</div>
+            <div class="report-count-tag" id="reportCount">共 0 篇研究報告</div>
+        </div>
+        <div class="hero-section">
+            <h1>台股投資研究報告總覽</h1>
+            <p>自動化 Markdown 轉換與全方位籌碼分析目錄</p>
+        </div>
+        <div class="search-container">
+            <input type="text" class="search-input" id="searchInput" placeholder="搜尋公司名稱、代號、日期或報告關鍵字...">
+            <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </div>
+    </header>
+
+    <div class="tabs-container">
+        <div class="tabs" id="tabs">
+            <button class="tab-btn active" data-tab="date">按日期分組</button>
+            <button class="tab-btn" data-tab="company">按公司分組</button>
+            <div class="tabs-indicator" id="tabsIndicator"></div>
+        </div>
+    </div>
+
+    <div class="content-section">
+        <!-- Date View -->
+        <div class="tab-content active" id="dateView">
+            <div class="timeline" id="timelineContainer"></div>
+        </div>
+
+        <!-- Company View -->
+        <div class="tab-content" id="companyView">
+            <div class="company-grid" id="companyGridContainer"></div>
+        </div>
+
+        <!-- No Results -->
+        <div class="no-results" id="noResults">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+            <p>找不到符合條件的報告，請試試其他關鍵字！</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 Stock Research Hub. Powered by Pandoc & DeepMind Antigravity.</p>
+    </footer>
+
+    <script>
+        // 由 Python 動態注入的報告資料
+        const reports = [
+    {
+        "filename": "20260521_2330_台積電.md",
+        "html_path": "report/20260521_2330_台積電.html",
+        "date": "2026-05-21",
+        "ticker": "2330",
+        "company": "台積電",
+        "title": "2026 台積電 (2330) 投資分析報告：AI 浪潮下的量化與價值評估"
+    },
+    {
+        "filename": "20260520_1560_中砂.md",
+        "html_path": "report/20260520_1560_中砂.html",
+        "date": "2026-05-20",
+        "ticker": "1560",
+        "company": "中砂",
+        "title": "2026 中砂 (1560) 投資分析報告：AI 浪潮下的量化與價值評估"
+    },
+    {
+        "filename": "20260520_2301_光寶科.md",
+        "html_path": "report/20260520_2301_光寶科.html",
+        "date": "2026-05-20",
+        "ticker": "2301",
+        "company": "光寶科",
+        "title": "2026 光寶科 (2301) 投資分析報告：AI 浪潮下的量化與價值評估"
+    },
+    {
+        "filename": "20260520_2327_國巨.md",
+        "html_path": "report/20260520_2327_國巨.html",
+        "date": "2026-05-20",
+        "ticker": "2327",
+        "company": "國巨",
+        "title": "2026 國巨 (2327) 投資分析報告：AI 浪潮下的量化與價值評估"
+    },
+    {
+        "filename": "20260520_2330_台積電.md",
+        "html_path": "report/20260520_2330_台積電.html",
+        "date": "2026-05-20",
+        "ticker": "2330",
+        "company": "台積電",
+        "title": "2026 台積電 (2330) 投資分析報告：AI 浪潮下的量化與價值評估"
+    },
+    {
+        "filename": "20260520_2357_華碩.md",
+        "html_path": "report/20260520_2357_華碩.html",
+        "date": "2026-05-20",
+        "ticker": "2357",
+        "company": "華碩",
+        "title": "2026 華碩 (2357) 投資分析報告：AI 浪潮下的量化與價值評估"
+    },
+    {
+        "filename": "20260520_2376_技嘉.md",
+        "html_path": "report/20260520_2376_技嘉.html",
+        "date": "2026-05-20",
+        "ticker": "2376",
+        "company": "技嘉",
+        "title": "2026 技嘉 (2376) 投資分析報告：AI 浪潮下的量化與價值評估"
+    },
+    {
+        "filename": "20260520_2404_漢唐.md",
+        "html_path": "report/20260520_2404_漢唐.html",
+        "date": "2026-05-20",
+        "ticker": "2404",
+        "company": "漢唐",
+        "title": "2026 漢唐 (2404) 投資分析報告：AI 浪潮下的量化與價值評估"
+    },
+    {
+        "filename": "20260520_2455_全新.md",
+        "html_path": "report/20260520_2455_全新.html",
+        "date": "2026-05-20",
+        "ticker": "2455",
+        "company": "全新",
+        "title": "2026 全新 (2455) 投資分析報告：AI 浪潮下的量化與價值評估"
+    },
+    {
+        "filename": "20260520_6239_力成.md",
+        "html_path": "report/20260520_6239_力成.html",
+        "date": "2026-05-20",
+        "ticker": "6239",
+        "company": "力成",
+        "title": "2026 力成 (6239) 投資分析報告：AI 浪潮下的量化與價值評估"
+    },
+    {
+        "filename": "20260520_6531_愛普.md",
+        "html_path": "report/20260520_6531_愛普.html",
+        "date": "2026-05-20",
+        "ticker": "6531",
+        "company": "愛普",
+        "title": "2026 愛普 (6531) 投資分析報告：AI 浪潮下的量化與價值評估"
+    },
+    {
+        "filename": "20260520_8299_群聯.md",
+        "html_path": "report/20260520_8299_群聯.html",
+        "date": "2026-05-20",
+        "ticker": "8299",
+        "company": "群聯",
+        "title": "2026 群聯 (8299) 投資分析報告：AI 浪潮下的量化與價值評估"
+    },
+    {
+        "filename": "20260520_台股10大潛力飆股總結報告.md",
+        "html_path": "report/20260520_台股10大潛力飆股總結報告.html",
+        "date": "2026-05-20",
+        "ticker": "",
+        "company": "台股10大潛力飆股總結報告",
+        "title": "🚀 台股 10 大成長潛力飆股——深度投資分析總結報告"
+    },
+    {
+        "filename": "20260519_1560_中砂.md",
+        "html_path": "report/20260519_1560_中砂.html",
+        "date": "2026-05-19",
+        "ticker": "1560",
+        "company": "中砂",
+        "title": "20260519_1560_中砂 (Kinik) Institutional Stock Analysis"
+    },
+    {
+        "filename": "20260519_2301_光寶科.md",
+        "html_path": "report/20260519_2301_光寶科.html",
+        "date": "2026-05-19",
+        "ticker": "2301",
+        "company": "光寶科",
+        "title": "2301 光寶科 (Lite-On) 機構級投資分析報告"
+    },
+    {
+        "filename": "20260519_2345_智邦.md",
+        "html_path": "report/20260519_2345_智邦.html",
+        "date": "2026-05-19",
+        "ticker": "2345",
+        "company": "智邦",
+        "title": "2026 智邦 (2345) 投資分析報告：AI 800G 浪潮下的網通龍頭"
+    },
+    {
+        "filename": "20260519_2376_技嘉.md",
+        "html_path": "report/20260519_2376_技嘉.html",
+        "date": "2026-05-19",
+        "ticker": "2376",
+        "company": "技嘉",
+        "title": "技嘉 (2376) 投資分析報告 - 2026/05/19"
+    },
+    {
+        "filename": "20260519_2404_漢唐.md",
+        "html_path": "report/20260519_2404_漢唐.html",
+        "date": "2026-05-19",
+        "ticker": "2404",
+        "company": "漢唐",
+        "title": "漢唐集成 (2404.TW) 專業機構級個股分析報告"
+    },
+    {
+        "filename": "20260519_2455_全新.md",
+        "html_path": "report/20260519_2455_全新.html",
+        "date": "2026-05-19",
+        "ticker": "2455",
+        "company": "全新",
+        "title": "2455 全新 (VPEC) Institutional Grade Equity Research"
+    },
+    {
+        "filename": "20260519_6531_愛普.md",
+        "html_path": "report/20260519_6531_愛普.html",
+        "date": "2026-05-19",
+        "ticker": "6531",
+        "company": "愛普",
+        "title": "股票分析報告：6531 愛普 (APMemory)"
+    },
+    {
+        "filename": "20260519_8299_群聯.md",
+        "html_path": "report/20260519_8299_群聯.html",
+        "date": "2026-05-19",
+        "ticker": "8299",
+        "company": "群聯",
+        "title": "8299 群聯 (Phison) 投資分析報告 - 機構級 (Institutional Grade)"
+    },
+    {
+        "filename": "20260518_2330_台積電.md",
+        "html_path": "report/20260518_2330_台積電.html",
+        "date": "2026-05-18",
+        "ticker": "2330",
+        "company": "台積電",
+        "title": "2026 台股深度分析報告：2330 台積電"
+    },
+    {
+        "filename": "20260518_2345_智邦.md",
+        "html_path": "report/20260518_2345_智邦.html",
+        "date": "2026-05-18",
+        "ticker": "2345",
+        "company": "智邦",
+        "title": "2026 台股深度分析報告：2345 智邦"
+    },
+    {
+        "filename": "20260518_3443_創意.md",
+        "html_path": "report/20260518_3443_創意.html",
+        "date": "2026-05-18",
+        "ticker": "3443",
+        "company": "創意",
+        "title": "2026 台股深度分析報告：3443 創意"
+    },
+    {
+        "filename": "20260518_3711_日月光投控.md",
+        "html_path": "report/20260518_3711_日月光投控.html",
+        "date": "2026-05-18",
+        "ticker": "3711",
+        "company": "日月光投控",
+        "title": "2026 台股深度分析報告：3711 日月光投控"
+    },
+    {
+        "filename": "20260518_4739_康普.md",
+        "html_path": "report/20260518_4739_康普.html",
+        "date": "2026-05-18",
+        "ticker": "4739",
+        "company": "康普",
+        "title": "2026 台股深度分析報告：2455 全新"
+    },
+    {
+        "filename": "20260518_6531_愛普.md",
+        "html_path": "report/20260518_6531_愛普.html",
+        "date": "2026-05-18",
+        "ticker": "6531",
+        "company": "愛普",
+        "title": "2026 台股深度分析報告：6531 愛普"
+    },
+    {
+        "filename": "20260518_6669_緯穎.md",
+        "html_path": "report/20260518_6669_緯穎.html",
+        "date": "2026-05-18",
+        "ticker": "6669",
+        "company": "緯穎",
+        "title": "2026 台股深度分析報告：6669 緯穎"
+    },
+    {
+        "filename": "20260518_6770_力積電.md",
+        "html_path": "report/20260518_6770_力積電.html",
+        "date": "2026-05-18",
+        "ticker": "6770",
+        "company": "力積電",
+        "title": "2026 台股深度分析報告：6770 力積電"
+    }
+];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initApp();
+        });
+
+        function initApp() {
+            // 更新總數
+            document.getElementById('reportCount').textContent = `共 ${reports.length} 篇研究報告`;
+
+            // 渲染視圖
+            renderDateView(reports);
+            renderCompanyView(reports);
+
+            // 初始化事件監聽
+            initTabs();
+            initSearch();
+        }
+
+        // ==========================================
+        // 渲染 By Date
+        // ==========================================
+
+        function renderDateView(filteredReports) {
+            const container = document.getElementById('timelineContainer');
+            container.innerHTML = '';
+
+            if (filteredReports.length === 0) return;
+
+            // 分組
+            const groups = {};
+            filteredReports.forEach(r => {
+                if (!groups[r.date]) {
+                    groups[r.date] = [];
+                }
+                groups[r.date].push(r);
+            });
+
+            // 排序日期 (新到舊)
+            const sortedDates = Object.keys(groups).sort((a, b) => b.localeCompare(a));
+
+            sortedDates.forEach(date => {
+                const groupDiv = document.createElement('div');
+                groupDiv.className = 'time-group';
+
+                const header = document.createElement('div');
+                header.className = 'time-date-header';
+                header.innerHTML = `
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    <span>${date}</span>
+                `;
+                groupDiv.appendChild(header);
+
+                const grid = document.createElement('div');
+                grid.className = 'report-grid';
+
+                groups[date].forEach(r => {
+                    const card = document.createElement('a');
+                    card.href = r.html_path;
+                    card.className = 'report-card';
+
+                    let tagsHtml = '';
+                    if (r.ticker) {
+                        tagsHtml += `<span class="tag ticker">${r.ticker}</span>`;
+                    }
+                    if (r.company && r.company !== r.ticker) {
+                        tagsHtml += `<span class="tag company">${r.company}</span>`;
+                    }
+
+                    card.innerHTML = `
+                        <div class="report-card-header">
+                            <div class="tags-row">${tagsHtml}</div>
+                        </div>
+                        <div class="report-card-title">${escapeHtml(r.title)}</div>
+                        <div class="report-card-footer">
+                            <span class="card-date">${r.date}</span>
+                            <span class="arrow-link">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12" y1="5" x2="19" y2="12" x1="12" y1="19"></polyline></svg>
+                            </span>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+
+                groupDiv.appendChild(grid);
+                container.appendChild(groupDiv);
+            });
+        }
+
+        // ==========================================
+        // 渲染 By Company
+        // ==========================================
+        function renderCompanyView(filteredReports, autoExpand = false) {
+            const container = document.getElementById('companyGridContainer');
+            container.innerHTML = '';
+
+            if (filteredReports.length === 0) return;
+
+            // 按公司 (Ticker + Company) 分組
+            const groups = {};
+            filteredReports.forEach(r => {
+                // 如果沒有 ticker 就以 company 當 Key
+                const key = r.ticker ? r.ticker : r.company;
+                if (!groups[key]) {
+                    groups[key] = {
+                        ticker: r.ticker || '',
+                        company: r.company || '未知公司',
+                        reports: []
+                    };
+                }
+                groups[key].reports.push(r);
+            });
+
+            // 排序公司：有 ticker 數字優先，無 ticker 的排後面
+            const sortedKeys = Object.keys(groups).sort((a, b) => {
+                const tickerA = groups[a].ticker;
+                const tickerB = groups[b].ticker;
+                if (tickerA && tickerB) return tickerA.localeCompare(tickerB);
+                if (tickerA) return -1;
+                if (tickerB) return 1;
+                return groups[a].company.localeCompare(groups[b].company);
+            });
+
+            sortedKeys.forEach(key => {
+                const group = groups[key];
+                
+                // 按日期排序歷史報告 (新到舊)
+                group.reports.sort((a, b) => b.date.localeCompare(a.date));
+
+                const card = document.createElement('div');
+                card.className = 'company-card';
+
+                // 點擊展開邏輯
+                card.addEventListener('click', (e) => {
+                    // 若點擊的是報告連結，就不要阻擋跳轉
+                    if (e.target.closest('.nested-report-item')) return;
+                    
+                    const list = card.querySelector('.company-reports-list');
+                    list.classList.toggle('expanded');
+                });
+
+                const reportsCount = group.reports.length;
+
+                let listHtml = '';
+                group.reports.forEach(r => {
+                    listHtml += `
+                        <a href="${r.html_path}" class="nested-report-item">
+                            <span class="nested-title">${escapeHtml(r.title)}</span>
+                            <span class="nested-date">${r.date}</span>
+                        </a>
+                    `;
+                });
+
+                card.innerHTML = `
+                    <div class="company-card-header">
+                        <div class="company-name">${escapeHtml(group.company)}</div>
+                        ${group.ticker ? `<div class="company-ticker">${group.ticker}</div>` : ''}
+                    </div>
+                    <div class="company-count">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                        <span>${reportsCount} 篇研究報告</span>
+                    </div>
+                    <div class="company-reports-list ${autoExpand ? 'expanded' : ''}">
+                        ${listHtml}
+                    </div>
+                `;
+
+                container.appendChild(card);
+            });
+        }
+
+        // ==========================================
+        // Tabs 控制
+        // ==========================================
+        function initTabs() {
+            const tabs = document.getElementById('tabs');
+            const buttons = tabs.querySelectorAll('.tab-btn');
+            const indicator = document.getElementById('tabsIndicator');
+
+            function updateIndicator(activeBtn) {
+                indicator.style.width = `${activeBtn.offsetWidth}px`;
+                indicator.style.left = `${activeBtn.offsetLeft}px`;
+            }
+
+            // 初始化寬度
+            const activeBtn = tabs.querySelector('.tab-btn.active');
+            if (activeBtn) {
+                updateIndicator(activeBtn);
+            }
+
+            buttons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    buttons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    updateIndicator(btn);
+
+                    const targetTab = btn.getAttribute('data-tab');
+                    document.querySelectorAll('.tab-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+
+                    if (targetTab === 'date') {
+                        document.getElementById('dateView').classList.add('active');
+                    } else {
+                        document.getElementById('companyView').classList.add('active');
+                    }
+                });
+            });
+
+            // 響應式：視窗重設時更新指示器位置
+            window.addEventListener('resize', () => {
+                const currentActive = tabs.querySelector('.tab-btn.active');
+                if (currentActive) {
+                    updateIndicator(currentActive);
+                }
+            });
+        }
+
+        // ==========================================
+        // 搜尋控制
+        // ==========================================
+        function initSearch() {
+            const searchInput = document.getElementById('searchInput');
+            const noResults = document.getElementById('noResults');
+
+            searchInput.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase().strip();
+
+                const filtered = reports.filter(r => {
+                    const matchTitle = r.title.toLowerCase().includes(query);
+                    const matchCompany = r.company.toLowerCase().includes(query);
+                    const matchTicker = r.ticker.toLowerCase().includes(query);
+                    const matchDate = r.date.replace(/-/g, '').includes(query) || r.date.includes(query);
+                    return matchTitle || matchCompany || matchTicker || matchDate;
+                });
+
+                if (filtered.length === 0) {
+                    document.getElementById('dateView').style.display = 'none';
+                    document.getElementById('companyView').style.display = 'none';
+                    noResults.classList.add('visible');
+                } else {
+                    document.getElementById('dateView').style.display = '';
+                    document.getElementById('companyView').style.display = '';
+                    noResults.classList.remove('visible');
+
+                    // 重新渲染，搜尋時 By Company 預設全部展開以方便查閱
+                    renderDateView(filtered);
+                    renderCompanyView(filtered, query.length > 0);
+                }
+            });
+        }
+
+        // ==========================================
+        // 工具函數
+        // ==========================================
+        function escapeHtml(string) {
+            const map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            };
+            return string.replace(/[&<>"']/g, function(m) { return map[m]; });
+        }
+
+        // 幫 String 加上 strip 功能
+        String.prototype.strip = function() {
+            return this.replace(/^\s+|\s+$/g, '');
+        };
+    </script>
+</body>
+</html>

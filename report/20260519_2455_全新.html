@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2455 全新 (VPEC) Institutional Grade Equity Research</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0f17;
+            --container-bg: rgba(22, 27, 34, 0.4);
+            --border-color: rgba(255, 255, 255, 0.06);
+            --text-primary: #f0f6fc;
+            --text-secondary: #8b949e;
+            --accent: #58a6ff;
+            --accent-grad: linear-gradient(135deg, #58a6ff 0%, #bc8cff 100%);
+            --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(88, 166, 255, 0.05) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(188, 140, 255, 0.05) 0px, transparent 50%);
+            color: var(--text-primary);
+            font-family: 'Outfit', 'Noto Sans TC', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 850px;
+            padding: 50px 24px 100px 24px;
+            position: relative;
+        }
+        
+        /* 懸浮返回按鈕 */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-bottom: 40px;
+            padding: 10px 20px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            backdrop-filter: blur(12px);
+        }
+        
+        .back-btn:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.07);
+            transform: translateX(-6px);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* 報告頁首 */
+        .report-header {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 28px;
+            margin-bottom: 40px;
+        }
+        
+        .report-meta {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+        
+        .meta-tag {
+            padding: 6px 14px;
+            border-radius: 20px;
+            background: rgba(88, 166, 255, 0.08);
+            color: var(--accent);
+            border: 1px solid rgba(88, 166, 255, 0.15);
+            font-family: 'Outfit', sans-serif;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .meta-tag.date {
+            background: rgba(188, 140, 255, 0.08);
+            color: #bc8cff;
+            border: 1px solid rgba(188, 140, 255, 0.15);
+        }
+        
+        /* 內文樣式排版 */
+        .report-content {
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            color: #c9d1d9;
+        }
+        
+        .report-content h1 {
+            font-family: 'Outfit', 'Noto Sans TC', sans-serif;
+            font-size: 2.4rem;
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 20px;
+            background: var(--accent-grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.3;
+        }
+        
+        .report-content h2 {
+            font-size: 1.65rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-top: 48px;
+            margin-bottom: 20px;
+            color: #ffffff;
+            font-weight: 600;
+        }
+        
+        .report-content h3 {
+            font-size: 1.3rem;
+            margin-top: 36px;
+            margin-bottom: 16px;
+            color: #e6edf3;
+            font-weight: 600;
+        }
+        
+        .report-content p {
+            margin-bottom: 28px;
+            text-align: justify;
+        }
+        
+        .report-content strong {
+            color: #ffffff;
+            font-weight: 600;
+        }
+        
+        .report-content ul, .report-content ol {
+            padding-left: 24px;
+            margin-bottom: 28px;
+        }
+        
+        .report-content li {
+            margin-bottom: 10px;
+        }
+        
+        /* 專業表格美化 */
+        .report-content table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 36px 0;
+            font-size: 0.95rem;
+            background: rgba(22, 27, 34, 0.5);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+        }
+        
+        .report-content th, .report-content td {
+            padding: 14px 18px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .report-content th {
+            background-color: rgba(255, 255, 255, 0.03);
+            font-weight: 600;
+            color: #ffffff;
+            font-family: 'Outfit', 'Noto Sans TC', sans-serif;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+        }
+        
+        .report-content tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .report-content tr:hover td {
+            background-color: rgba(255, 255, 255, 0.01);
+        }
+        
+        /* 區塊引言 */
+        .report-content blockquote {
+            margin: 32px 0;
+            padding: 12px 24px;
+            color: #8b949e;
+            border-left: 4px solid var(--accent);
+            background: rgba(88, 166, 255, 0.03);
+            border-radius: 0 12px 12px 0;
+            font-style: italic;
+        }
+        
+        .report-content blockquote p {
+            margin: 0;
+        }
+        
+        /* 行內與區塊程式碼 */
+        .report-content code {
+            font-family: 'Courier New', Courier, monospace;
+            padding: 3px 6px;
+            background-color: rgba(255, 255, 255, 0.08);
+            border-radius: 6px;
+            font-size: 0.9em;
+            color: #ff7b72;
+        }
+        
+        .report-content pre {
+            background: #161b22;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            overflow: auto;
+            margin: 32px 0;
+            box-shadow: var(--shadow);
+        }
+        
+        .report-content pre code {
+            background-color: transparent;
+            padding: 0;
+            font-size: 0.9rem;
+            color: #e6edf3;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        
+        /* 閱讀進度條 */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: var(--accent-grad);
+            width: 0%;
+            z-index: 100;
+            transition: width 0.1s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    <div class="container">
+        <a href="../index.html" class="back-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12" y1="19" x2="5" y2="12" x1="12" y1="5"></polyline></svg>
+            返回報告總覽
+        </a>
+        <article class="report-content">
+            <div class="report-header">
+                <h1>2455 全新 (VPEC) Institutional Grade Equity Research</h1>
+                <div class="report-meta">
+                    <span class="meta-tag date">
+                        <svg width="12" height="12" style="margin-right: 6px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        2026-05-19
+                    </span>
+                    <span class="meta-tag">代號 2455</span>
+                    <span class="meta-tag">全新</span>
+                </div>
+            </div>
+            <h1 id="全新-vpec-institutional-grade-equity-research">2455 全新 (VPEC)
+Institutional Grade Equity Research</h1>
+<p><strong>Date:</strong> 2026-05-19 <strong>Current Price:</strong>
+383.0 TWD (as of 2026/05/19 mid-day) <strong>Rating:</strong> Buy (Focus
+on AI Optical Transformation)</p>
+<hr />
+<h2 id="數據源聲明-data-source-verification">1. 數據源聲明 (Data Source
+Verification)</h2>
+<ul>
+<li><strong>Primary Sources</strong>: FinMind, yfinance,
+市場法人研究報告 (CBIT, HSBC, China Times).</li>
+<li><strong>Verification</strong>: 雙源比對 2026 預估 EPS 均值落在 5.0 -
+5.36 TWD。即時股價 383 元，處於近期高點震盪。</li>
+</ul>
+<h2 id="標準化財務評分-financial-scoring">2. 標準化財務評分 (Financial
+Scoring)</h2>
+<h3 id="piotroski-f-score-89-excellent">Piotroski F-Score:
+<strong>8/9</strong> (Excellent)</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">指標</th>
+<th style="text-align: left;">狀態</th>
+<th style="text-align: left;">得分</th>
+<th style="text-align: left;">說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">ROA &gt; 0</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">獲利穩定回升</td>
+</tr>
+<tr>
+<td style="text-align: left;">OCF &gt; 0</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">營業現金流正向</td>
+</tr>
+<tr>
+<td style="text-align: left;">ΔROA &gt; 0</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">2024-2026 呈成長趨勢</td>
+</tr>
+<tr>
+<td style="text-align: left;">OCF &gt; NI</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">盈餘品質佳</td>
+</tr>
+<tr>
+<td style="text-align: left;">ΔLeverage &lt; 0</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">負債比微增 (擴產支應)</td>
+</tr>
+<tr>
+<td style="text-align: left;">ΔLiquidity &gt; 0</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">流動比率 &gt; 300%</td>
+</tr>
+<tr>
+<td style="text-align: left;">ΔShares &lt;= 0</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">無顯著稀釋</td>
+</tr>
+<tr>
+<td style="text-align: left;">ΔMargin &gt; 0</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">光電子佔比提升帶動毛利</td>
+</tr>
+<tr>
+<td style="text-align: left;">ΔAsset Turnover</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">營收成長率遠超資產增長</td>
+</tr>
+</tbody>
+</table>
+<h3 id="altman-z-score-16.37-extremely-safe">Altman Z-Score:
+<strong>16.37</strong> (Extremely Safe)</h3>
+<ul>
+<li><strong>分析</strong>: 分數遠高於 2.99
+安全閾值，主因是極高的市場價值對負債比 (X4)
+以及優異的流動資產結構。公司破產風險極低。</li>
+</ul>
+<h2 id="量化與技術面建模-quantitative-technical">3. 量化與技術面建模
+(Quantitative &amp; Technical)</h2>
+<ul>
+<li><strong>技術指標</strong>: MA 呈現多頭排列；5/18
+帶量跳空上漲後，今日 (5/19) 進行 380 元附近的強勢震盪。MACD
+持續紅柱擴張。</li>
+<li><strong>同業比較</strong>:
+<ul>
+<li><strong>全新 (2455)</strong>: P/E ~76x (2026E)。具備最高
+AI/矽光子純度，估值溢價最高。</li>
+<li><strong>穩懋 (3105)</strong>: P/E
+~25x。代工龍頭，受產能利用率波動影響較大。</li>
+<li><strong>宏捷科 (8086)</strong>: P/E ~20x。以手機/WiFi 7
+為主，成長較為線性。</li>
+</ul></li>
+</ul>
+<h2 id="籌碼面深度追蹤-insider-smart-money">4. 籌碼面深度追蹤 (Insider
+&amp; Smart Money)</h2>
+<ul>
+<li><strong>外資</strong>: 持股比 27.52%，5 月份連續買超。</li>
+<li><strong>投信</strong>: 持股比 5.36%，近期亦呈現小幅加碼態勢。</li>
+<li><strong>大戶動向</strong>: 400 張大戶持股比例從 31.6% 升至
+36.1%，籌碼集中度優。</li>
+<li><strong>風險提醒</strong>: 董監質押比例約
+44.87%，管理階層財務槓桿較高，需留意股價大幅回檔壓力。</li>
+</ul>
+<h2 id="硬核估值與情境模擬-valuation-scenarios">5. 硬核估值與情境模擬
+(Valuation &amp; Scenarios)</h2>
+<h3 id="dcf-模型分析">DCF 模型分析</h3>
+<ul>
+<li><strong>WACC</strong>: 8.2% (考量低負債與台幣環境)</li>
+<li><strong>Growth (Next 5Y)</strong>: 17% (AI 800G/1.6T 需求爆發)</li>
+<li><strong>Terminal Growth</strong>: 3.0%</li>
+<li><strong>估值結果</strong>: <strong>Base Target 380
+TWD</strong>。</li>
+</ul>
+<h3 id="情境模擬-valuation-matrix">情境模擬 (Valuation Matrix)</h3>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">情境</th>
+<th style="text-align: left;">2026 EPS</th>
+<th style="text-align: left;">P/E 乘數</th>
+<th style="text-align: left;">目標價</th>
+<th style="text-align: left;">邏輯說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Bull (樂觀)</strong></td>
+<td style="text-align: left;">6.0</td>
+<td style="text-align: left;">85x</td>
+<td style="text-align: left;"><strong>510 TWD</strong></td>
+<td style="text-align: left;">1.6T 出貨超預期，AI 佔比 &gt; 70%</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Base (基準)</strong></td>
+<td style="text-align: left;">5.0</td>
+<td style="text-align: left;">76x</td>
+<td style="text-align: left;"><strong>380 TWD</strong></td>
+<td style="text-align: left;">符合法人預期，維持現有 AI 評價</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Bear (悲觀)</strong></td>
+<td style="text-align: left;">4.5</td>
+<td style="text-align: left;">62x</td>
+<td style="text-align: left;"><strong>280 TWD</strong></td>
+<td style="text-align: left;">AI 支出放緩，基板缺貨影響產能</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>VaR (Value at Risk)</strong>: 預估 1 個月 95%
+置信區間潛在最大跌幅為
+<strong>-15.2%</strong>，主要受半導體週期波動影響。</li>
+</ul>
+<h2 id="情緒面與風險管理-sentiment-risk">6. 情緒面與風險管理 (Sentiment
+&amp; Risk)</h2>
+<ul>
+<li><strong>社交情緒 (PTT/Dcard)</strong>:
+<ul>
+<li><strong>多方</strong>: 「光通訊領頭羊」、「800G
+唯一磊晶來源」、「矽光子概念最純」。</li>
+<li><strong>空方</strong>: 「本益比太扯」、「散戶追高風險」、「PA
+三雄過去很坑」。</li>
+<li><strong>總結</strong>: 市場情緒處於 <strong>Greed (貪婪)</strong>
+區間，雖有風險警告，但趨勢明確。</li>
+</ul></li>
+<li><strong>風險查核</strong>:
+<ol type="1">
+<li>磷化銦 (InP) 基板供應穩定性。</li>
+<li>NVIDIA 下一代架構對光模組規格的異動。</li>
+<li>董監高質押比率的流動性風險。</li>
+</ol></li>
+</ul>
+<h2 id="總結-summary">7. 總結 (Summary)</h2>
+<p>全新 (2455) 已成功轉型為 <strong>AI 資料中心核心耗材股</strong>。其
+F-Score 8 分反映強勁體質，Z-Score 顯示極高安全性。雖然 P/E
+位於歷史高位，但在 AI
+矽光子技術路徑明確下，市場偏向給予高溢價評價。短期支撐參考 370-380
+元。</p>
+<hr />
+<p><strong>Disclaimer:</strong>
+本報告僅供參考，不構成投資建議。投資人應獨立評估風險。</p>
+
+        </article>
+    </div>
+    <script>
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("progressBar").style.width = scrolled + "%";
+        };
+    </script>
+</body>
+</html>
