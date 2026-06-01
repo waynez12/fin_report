@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>欣興 (3037) 專業級投資分析報告</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0f17;
+            --container-bg: rgba(22, 27, 34, 0.4);
+            --border-color: rgba(255, 255, 255, 0.06);
+            --text-primary: #f0f6fc;
+            --text-secondary: #8b949e;
+            --accent: #58a6ff;
+            --accent-grad: linear-gradient(135deg, #58a6ff 0%, #bc8cff 100%);
+            --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(88, 166, 255, 0.05) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(188, 140, 255, 0.05) 0px, transparent 50%);
+            color: var(--text-primary);
+            font-family: 'Outfit', 'Noto Sans TC', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 850px;
+            padding: 50px 24px 100px 24px;
+            position: relative;
+        }
+        
+        /* 懸浮返回按鈕 */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-bottom: 40px;
+            padding: 10px 20px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            backdrop-filter: blur(12px);
+        }
+        
+        .back-btn:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.07);
+            transform: translateX(-6px);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* 報告頁首 */
+        .report-header {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 28px;
+            margin-bottom: 40px;
+        }
+        
+        .report-meta {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+        
+        .meta-tag {
+            padding: 6px 14px;
+            border-radius: 20px;
+            background: rgba(88, 166, 255, 0.08);
+            color: var(--accent);
+            border: 1px solid rgba(88, 166, 255, 0.15);
+            font-family: 'Outfit', sans-serif;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .meta-tag.date {
+            background: rgba(188, 140, 255, 0.08);
+            color: #bc8cff;
+            border: 1px solid rgba(188, 140, 255, 0.15);
+        }
+        
+        /* 內文樣式排版 */
+        .report-content {
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            color: #c9d1d9;
+        }
+        
+        .report-content h1 {
+            font-family: 'Outfit', 'Noto Sans TC', sans-serif;
+            font-size: 2.4rem;
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 20px;
+            background: var(--accent-grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.3;
+        }
+        
+        .report-content h2 {
+            font-size: 1.65rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-top: 48px;
+            margin-bottom: 20px;
+            color: #ffffff;
+            font-weight: 600;
+        }
+        
+        .report-content h3 {
+            font-size: 1.3rem;
+            margin-top: 36px;
+            margin-bottom: 16px;
+            color: #e6edf3;
+            font-weight: 600;
+        }
+        
+        .report-content p {
+            margin-bottom: 28px;
+            text-align: justify;
+        }
+        
+        .report-content strong {
+            color: #ffffff;
+            font-weight: 600;
+        }
+        
+        .report-content ul, .report-content ol {
+            padding-left: 24px;
+            margin-bottom: 28px;
+        }
+        
+        .report-content li {
+            margin-bottom: 10px;
+        }
+        
+        /* 專業表格美化 */
+        .report-content table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 36px 0;
+            font-size: 0.95rem;
+            background: rgba(22, 27, 34, 0.5);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+        }
+        
+        .report-content th, .report-content td {
+            padding: 14px 18px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .report-content th {
+            background-color: rgba(255, 255, 255, 0.03);
+            font-weight: 600;
+            color: #ffffff;
+            font-family: 'Outfit', 'Noto Sans TC', sans-serif;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+        }
+        
+        .report-content tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .report-content tr:hover td {
+            background-color: rgba(255, 255, 255, 0.01);
+        }
+        
+        /* 區塊引言 */
+        .report-content blockquote {
+            margin: 32px 0;
+            padding: 12px 24px;
+            color: #8b949e;
+            border-left: 4px solid var(--accent);
+            background: rgba(88, 166, 255, 0.03);
+            border-radius: 0 12px 12px 0;
+            font-style: italic;
+        }
+        
+        .report-content blockquote p {
+            margin: 0;
+        }
+        
+        /* 行內與區塊程式碼 */
+        .report-content code {
+            font-family: 'Courier New', Courier, monospace;
+            padding: 3px 6px;
+            background-color: rgba(255, 255, 255, 0.08);
+            border-radius: 6px;
+            font-size: 0.9em;
+            color: #ff7b72;
+        }
+        
+        .report-content pre {
+            background: #161b22;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            overflow: auto;
+            margin: 32px 0;
+            box-shadow: var(--shadow);
+        }
+        
+        .report-content pre code {
+            background-color: transparent;
+            padding: 0;
+            font-size: 0.9rem;
+            color: #e6edf3;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        
+        /* 閱讀進度條 */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: var(--accent-grad);
+            width: 0%;
+            z-index: 100;
+            transition: width 0.1s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    <div class="container">
+        <a href="../index.html" class="back-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12" y1="19" x2="5" y2="12" x1="12" y1="5"></polyline></svg>
+            返回報告總覽
+        </a>
+        <article class="report-content">
+            <div class="report-header">
+                <h1>欣興 (3037) 專業級投資分析報告</h1>
+                <div class="report-meta">
+                    <span class="meta-tag date">
+                        <svg width="12" height="12" style="margin-right: 6px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        2026-06-01
+                    </span>
+                    <span class="meta-tag">代號 3037</span>
+                    <span class="meta-tag">欣興</span>
+                </div>
+            </div>
+            <h1 id="欣興-3037-專業級投資分析報告">欣興 (3037)
+專業級投資分析報告</h1>
+<blockquote>
+<p><strong>報告日期</strong>：2026-06-01<br />
+<strong>當前股價</strong>：$1050.00 (來源: FinMind (Adj))<br />
+<strong>評等建議</strong>：<strong>Hold (中立/觀望)</strong></p>
+</blockquote>
+<hr />
+<h2 id="投資摘要-executive-summary">1. 投資摘要 (Executive Summary)</h2>
+<p>欣興 (3037) 作為全球高階 ABF 載板領導廠商，受惠於 AI
+晶片升級與大尺寸高層數載板需求爆發，中長線營運展望佳。近五日法人大舉買超
+1.08 萬張，籌碼面強勁。然而目前股價已來到 $1050
+元，步入法人去極端值共識區間 ($850 - $1150 元) 之高檔，反映了市場對 AI
+成長之定價。考量當前歷史本益比已達
+154x，建議投資人此時<strong>不宜追高，待股價回檔至 $920 - $960
+區間再行中長線布局。</strong></p>
+<hr />
+<h2 id="量化與估值矩陣-quant-valuation-matrix">2. 量化與估值矩陣 (Quant
+&amp; Valuation Matrix)</h2>
+<h3 id="財務與風險評分">2.1 財務與風險評分</h3>
+<ul>
+<li><strong>Piotroski F-Score</strong>: <strong>7 / 9</strong>
+(財務結構健全)
+<ul>
+<li><em>通過指標</em>：ROA &gt; 0、CFO &gt; 0、Delta ROA &gt;
+0、Accrual、Delta Leverage &lt; 0、Delta Margin &gt; 0、Delta Turnover
+&gt; 0。</li>
+<li><em>未通過指標</em>：Delta Liquidity &gt; 0 (流動比率微幅下降)、No
+EQ Issue (因購置設備或股本變動產生股數增加)。</li>
+</ul></li>
+<li><strong>Altman Z”-Score</strong>: <strong>13.80</strong>
+(處於極安全的綠色區間，無任何財務重整或破產風險)。</li>
+</ul>
+<h3 id="多情境-dcf-估值-table">2.2 多情境 DCF 估值 Table</h3>
+<p>基於 2026-06-01 動態無風險利率 <span
+class="math inline"><em>R</em><sub><em>f</em></sub> = 4.45%</span>，個股
+Beta = 2.15，Ke = 17.38%，WACC (Base) = 14.31%。 * <strong>最大預期回撤
+(VaR)</strong>：1-Day VaR = <strong>6.29%</strong>，5-Day VaR =
+<strong>14.07%</strong>。</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">情境</th>
+<th style="text-align: left;">假設條件</th>
+<th style="text-align: left;">估值參數</th>
+<th style="text-align: left;">目標價</th>
+<th style="text-align: left;">潛在空間</th>
+<th style="text-align: left;">評估說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Bull (樂觀)</strong></td>
+<td style="text-align: left;">高階 AI 載板出貨超預期</td>
+<td style="text-align: left;">WACC=13.31%, g=20.0%</td>
+<td style="text-align: left;"><strong>$218.93</strong></td>
+<td style="text-align: left;"><strong>-79.15%</strong></td>
+<td style="text-align: left;">傳統歷史 DCF 未反映 forward AI
+估值重估</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Base (基本)</strong></td>
+<td style="text-align: left;">載板業務平穩增長</td>
+<td style="text-align: left;">WACC=14.31%, g=15.0%</td>
+<td style="text-align: left;"><strong>$164.90</strong></td>
+<td style="text-align: left;"><strong>-84.30%</strong></td>
+<td style="text-align: left;">基於歷史 FCF 估算，與現價有結構性偏離</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Bear (悲觀)</strong></td>
+<td style="text-align: left;">產能利用率下滑，折舊侵蝕</td>
+<td style="text-align: left;">WACC=15.31%, g=8.0%</td>
+<td style="text-align: left;"><strong>$118.46</strong></td>
+<td style="text-align: left;"><strong>-88.72%</strong></td>
+<td style="text-align: left;">產能過剩，高折舊拖累毛利率</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>[!IMPORTANT] <strong>DCF
+估值與目前股價偏差之關鍵解讀：</strong><br />
+傳統歷史 DCF 模型合理價僅 $164.90
+元，主要因其基於歷史自由現金流計算，並被高 WACC (14.31%)
+與歷史基期壓制。然而，隨著 AI 晶片大幅轉向 20+ 層的 ABF
+載板，市場已對其進行大幅 Re-rating。以 2026 年預估 EPS 區間 $11.8 ~
+$16.2 元（中位數約 14.0 元）計算，目前的股價對應 <strong>Forward PE 約
+75x</strong>，已部分定價其未來的成長性。</p>
+</blockquote>
+<hr />
+<h2 id="大-alpha-深入洞見-qualitative-insights">3. 6 大 Alpha 深入洞見
+(Qualitative Insights)</h2>
+<ul>
+<li><strong>產業連動</strong>：在 AI GPU (如 NVIDIA Blackwell 系列)
+的載板市場中擁有極高市占率。高階產品產能利用率持續吃緊。</li>
+<li><strong>經營層指引</strong>：經營層對 AI 伺服器與 HPC
+帶動的載板需求增長持積極態度，定調中長期獲利成長，但亦提醒折舊費用對短期的部分毛利率壓制。</li>
+<li><strong>籌碼與資金</strong>：近五日三大法人合計買超達 <strong>1.08
+萬張</strong>，資金淨流入動能強勁。千張大股東持股比例高達
+69.21%，籌碼集中度高。</li>
+<li><strong>宏觀與匯率</strong>：USD/TWD 31.30，屬強美元受益者。但美債
+10 年期殖利率 4.45% 在高融資背景下將增加其債務利息負擔。</li>
+<li><strong>催化劑與法人目標價</strong>：催化劑包括 NVIDIA AI
+晶片出貨進度與 2026 Q3 蘋果拉貨。去極端值法人目標價中位數約為
+<strong>1000 元</strong> (最新報告區間 600 ~ 1350 元)。</li>
+</ul>
+<hr />
+<h2 id="風險與反向觀點-risk-factors">4. 風險與反向觀點 (Risk
+Factors)</h2>
+<ul>
+<li><strong>折舊怪獸侵蝕利潤 (核心財務風險)</strong>：大舉資本支出若碰上
+2027 年 AI 需求成長放緩，過度擴充的載板產能將使毛利率面臨劇烈下修。</li>
+<li><strong>反向觀點 (利空假說)</strong>：目前股價 $1050
+元已偏向過熱，若下半年獲利實現進度低於預期，股價容易面臨 10%-15%
+的修正回測季線 ($704 元)。</li>
+</ul>
+
+        </article>
+    </div>
+    <script>
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("progressBar").style.width = scrolled + "%";
+        };
+    </script>
+</body>
+</html>

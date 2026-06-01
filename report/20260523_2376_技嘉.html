@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 技嘉 (2376) 專業級投資分析報告</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0f17;
+            --container-bg: rgba(22, 27, 34, 0.4);
+            --border-color: rgba(255, 255, 255, 0.06);
+            --text-primary: #f0f6fc;
+            --text-secondary: #8b949e;
+            --accent: #58a6ff;
+            --accent-grad: linear-gradient(135deg, #58a6ff 0%, #bc8cff 100%);
+            --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(88, 166, 255, 0.05) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(188, 140, 255, 0.05) 0px, transparent 50%);
+            color: var(--text-primary);
+            font-family: 'Outfit', 'Noto Sans TC', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 850px;
+            padding: 50px 24px 100px 24px;
+            position: relative;
+        }
+        
+        /* 懸浮返回按鈕 */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-bottom: 40px;
+            padding: 10px 20px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            backdrop-filter: blur(12px);
+        }
+        
+        .back-btn:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.07);
+            transform: translateX(-6px);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* 報告頁首 */
+        .report-header {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 28px;
+            margin-bottom: 40px;
+        }
+        
+        .report-meta {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+        
+        .meta-tag {
+            padding: 6px 14px;
+            border-radius: 20px;
+            background: rgba(88, 166, 255, 0.08);
+            color: var(--accent);
+            border: 1px solid rgba(88, 166, 255, 0.15);
+            font-family: 'Outfit', sans-serif;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .meta-tag.date {
+            background: rgba(188, 140, 255, 0.08);
+            color: #bc8cff;
+            border: 1px solid rgba(188, 140, 255, 0.15);
+        }
+        
+        /* 內文樣式排版 */
+        .report-content {
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            color: #c9d1d9;
+        }
+        
+        .report-content h1 {
+            font-family: 'Outfit', 'Noto Sans TC', sans-serif;
+            font-size: 2.4rem;
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 20px;
+            background: var(--accent-grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.3;
+        }
+        
+        .report-content h2 {
+            font-size: 1.65rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-top: 48px;
+            margin-bottom: 20px;
+            color: #ffffff;
+            font-weight: 600;
+        }
+        
+        .report-content h3 {
+            font-size: 1.3rem;
+            margin-top: 36px;
+            margin-bottom: 16px;
+            color: #e6edf3;
+            font-weight: 600;
+        }
+        
+        .report-content p {
+            margin-bottom: 28px;
+            text-align: justify;
+        }
+        
+        .report-content strong {
+            color: #ffffff;
+            font-weight: 600;
+        }
+        
+        .report-content ul, .report-content ol {
+            padding-left: 24px;
+            margin-bottom: 28px;
+        }
+        
+        .report-content li {
+            margin-bottom: 10px;
+        }
+        
+        /* 專業表格美化 */
+        .report-content table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 36px 0;
+            font-size: 0.95rem;
+            background: rgba(22, 27, 34, 0.5);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+        }
+        
+        .report-content th, .report-content td {
+            padding: 14px 18px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .report-content th {
+            background-color: rgba(255, 255, 255, 0.03);
+            font-weight: 600;
+            color: #ffffff;
+            font-family: 'Outfit', 'Noto Sans TC', sans-serif;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+        }
+        
+        .report-content tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .report-content tr:hover td {
+            background-color: rgba(255, 255, 255, 0.01);
+        }
+        
+        /* 區塊引言 */
+        .report-content blockquote {
+            margin: 32px 0;
+            padding: 12px 24px;
+            color: #8b949e;
+            border-left: 4px solid var(--accent);
+            background: rgba(88, 166, 255, 0.03);
+            border-radius: 0 12px 12px 0;
+            font-style: italic;
+        }
+        
+        .report-content blockquote p {
+            margin: 0;
+        }
+        
+        /* 行內與區塊程式碼 */
+        .report-content code {
+            font-family: 'Courier New', Courier, monospace;
+            padding: 3px 6px;
+            background-color: rgba(255, 255, 255, 0.08);
+            border-radius: 6px;
+            font-size: 0.9em;
+            color: #ff7b72;
+        }
+        
+        .report-content pre {
+            background: #161b22;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            overflow: auto;
+            margin: 32px 0;
+            box-shadow: var(--shadow);
+        }
+        
+        .report-content pre code {
+            background-color: transparent;
+            padding: 0;
+            font-size: 0.9rem;
+            color: #e6edf3;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        
+        /* 閱讀進度條 */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: var(--accent-grad);
+            width: 0%;
+            z-index: 100;
+            transition: width 0.1s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    <div class="container">
+        <a href="../index.html" class="back-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12" y1="19" x2="5" y2="12" x1="12" y1="5"></polyline></svg>
+            返回報告總覽
+        </a>
+        <article class="report-content">
+            <div class="report-header">
+                <h1>2026 技嘉 (2376) 專業級投資分析報告</h1>
+                <div class="report-meta">
+                    <span class="meta-tag date">
+                        <svg width="12" height="12" style="margin-right: 6px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        2026-05-23
+                    </span>
+                    <span class="meta-tag">代號 2376</span>
+                    <span class="meta-tag">技嘉</span>
+                </div>
+            </div>
+            <h1 id="技嘉-2376-專業級投資分析報告">2026 技嘉 (2376)
+專業級投資分析報告</h1>
+<blockquote>
+<p><strong>報告日期</strong>: 2026-05-23 <strong>標的代號</strong>: 2376
+(技嘉科技) <strong>當前股價</strong>: $322.50 (截至 2026-05-22 收盤)
+<strong>評等</strong>: <strong>強力買進 (Strong Buy) /
+價值極度低估</strong> <strong>投資天期</strong>: 12 個月</p>
+</blockquote>
+<hr />
+<h2 id="投資摘要-executive-summary">1. 投資摘要 (Executive Summary)</h2>
+<p>技嘉 (2376) 已成功由板卡大廠轉型為 <strong>AI
+基礎設施龍頭代工廠</strong>，伺服器營收比重攀升至 71.5%，其中 AI
+伺服器占整體伺服器營收比重超過八至九成。2026
+年第一季，技嘉繳出營收破千億、稅後純益 52.68 億元、EPS 7.86
+元的歷史新高成績單（年化 EPS 達 33.70 元）。</p>
+<p><strong>核心邏輯</strong>：公司目前的本益比 (PE) 僅
+<strong>15.06x</strong>，顯著低於 20.06x
+的歷史平均水平，也遠低於同業平均。截至第一季底的 <strong>1,316
+億元戰略性存貨</strong> 是為了確保下半年大量伺服器訂單（含 Blackwell
+GB300 與下半年量產的 Vera Rubin 平台）順利交貨而進行的備料。本報告採用
+<strong>法人混合估值模型（PE + DCF 50/50
+權重）</strong>，對其營運現金流進行了代工廠 60.0% 的合理化折價，並將
+Beta 調整為 1.10 反映 AI
+轉型後的實質風險（WACC=9.50%）。校正後的合理估值顯示，基準目標價為
+<strong>$483.79</strong>，而當前股價（$322.50）甚至低於悲觀情境合理價（$317.49）附近，提供極佳的低風險買進契機。</p>
+<hr />
+<h2 id="量化與估值矩陣-quant-valuation-matrix">2. 量化與估值矩陣 (Quant
+&amp; Valuation Matrix)</h2>
+<h3 id="a.-財務與風險評級">A. 財務與風險評級</h3>
+<ul>
+<li><strong>Piotroski F-Score</strong>: <strong>4 / 9</strong>
+<ul>
+<li><em>通過指標</em>：ROA &gt; 0 (2.28%)、Delta ROA &gt; 0
+(+0.02%)、Delta Leverage &lt; 0 (流動負債結構改善)、No EQ Issue
+(無發行普通股稀釋)。</li>
+<li><em>未通過指標</em>：CFO &gt; 0 與 Accrual (因策略性大備料 1,316
+億元，使營運現金流呈現 -206.5 億元短期流出)、Delta Liquidity、Delta
+Margin 及 Delta
+Turnover。在伺服器代工模式下，毛利率相較傳統高毛利板卡略微拉平，但這有賴營收規模放大及獲利金額絕對值大增來補償。</li>
+</ul></li>
+<li><strong>Altman Z”-Score (非製造業模型)</strong>:
+<strong>4.32</strong>
+<ul>
+<li><em>風險解讀</em>：高於安全警戒值
+2.9，證明技嘉的流動性與資本結構處於健康區間，並無信用或短期財務危機之虞。</li>
+</ul></li>
+</ul>
+<h3 id="b.-動態-wacc-參數-capm-模型">B. 動態 WACC 參數 (CAPM 模型)</h3>
+<ul>
+<li><strong>無風險利率 (<span
+class="math inline"><em>R</em><sub><em>f</em></sub></span>)</strong>:
+4.57% (10 年期美國公債殖利率)</li>
+<li><strong>個股 Beta 值</strong>: 1.10 (經上修調整，原為
+0.821。此調整反映技嘉切入 AI
+伺服器後，經營風險與股價波動度顯著增加之實況)</li>
+<li><strong>股權風險溢酬 (ERP)</strong>: 6.00%</li>
+<li><strong>權益成本 (<span
+class="math inline"><em>K</em><sub><em>e</em></sub></span>)</strong>:
+11.17%</li>
+<li><strong>債務成本 (<span
+class="math inline"><em>K</em><sub><em>d</em></sub></span>)</strong>:
+2.50%</li>
+<li><strong>動態 WACC (Base)</strong>: <strong>9.50%</strong> (以 80%
+權益 / 20% 債務結構計算，原為 8.00%)
+<ul>
+<li><em>Bull WACC</em>: 8.50%</li>
+<li><em>Bear WACC</em>: 10.50%</li>
+</ul></li>
+</ul>
+<h3 id="c.-多情境法人混合估值矩陣">C. 多情境法人混合估值矩陣</h3>
+<p>採用 <strong>50% DCF 貼現模型（現金轉換率上限 60.0%）+ 50%
+本益比乘數法</strong> 交叉校準計算： * <strong>年化預估 EPS</strong>:
+$33.70 (基於 Q1 單季 EPS 7.86 元 <span class="math inline">×</span>
+4，並微幅考慮下半年出貨增幅) * <strong>本益比校正</strong>: 基準 14.0x /
+樂觀 17.0x / 悲觀 11.0x</p>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">情境</th>
+<th style="text-align: left;">假設條件</th>
+<th style="text-align: left;">混合合理價</th>
+<th style="text-align: left;">潛在空間</th>
+<th style="text-align: left;">決策參考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>樂觀情境 (Bull)</strong></td>
+<td style="text-align: left;">GB300 DLC
+液冷伺服器爆量，毛利率超預期</td>
+<td style="text-align: left;"><strong>$714.80</strong></td>
+<td style="text-align: left;"><strong>+121.64%</strong></td>
+<td style="text-align: left;">本益比估值重估上調至 17x</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>基準情境 (Base)</strong></td>
+<td style="text-align: left;">伺服器產能倍增去化順利，AI
+營收年增三位數</td>
+<td style="text-align: left;"><strong>$483.79</strong></td>
+<td style="text-align: left;"><strong>+50.01%</strong></td>
+<td style="text-align: left;">長期核心價值錨定目標</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>悲觀情境 (Bear)</strong></td>
+<td style="text-align: left;">二線 CSP
+拉貨放緩，代工同業價格競爭加劇</td>
+<td style="text-align: left;"><strong>$317.49</strong></td>
+<td style="text-align: left;"><strong>-1.55%</strong></td>
+<td style="text-align: left;">下行風險安全下檔支撐線</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>[!IMPORTANT] 經過法人混合模型修正後，基準合理價由原本嚴重偏離實務的
+$1,053.09 收斂至合理的
+<strong>$483.79</strong>，與大和資本調升後的目標價 $422
+互為印證，且反映下半年美國與台灣土城新廠產能倍增的預期。當前收盤價
+<strong>$322.50</strong> 幾乎完全重疊於悲觀合理價
+$317.49，下行風險已獲充分定價。</p>
+</blockquote>
+<h3 id="d.-風險量化-value-at-risk">D. 風險量化 (Value at Risk)</h3>
+<ul>
+<li><strong>1-Day / 5-Day VaR (95% 信心水準)</strong>: <strong>4.66% /
+10.43%</strong></li>
+<li><em>解讀</em>：相較於中小型 IC 設計股，技嘉的股價波動率顯著較低，5
+日最大可能預期回撤僅為
+10.43%。這對於機構資金與尋求低回撤的穩健型投資者而言，提供了更高的操作穩定度。</li>
+</ul>
+<hr />
+<h2 id="大-alpha-深入洞見-qualitative-insights">3. 6 大 Alpha 深入洞見
+(Qualitative Insights)</h2>
+<h3 id="產業上下游連動-supply-chain-alpha">① 產業上下游連動 (Supply
+Chain Alpha)</h3>
+<p>技嘉已經完成了 NVIDIA GB300 與下代 Vera Rubin
+平台的導入。下游端，技嘉主要深耕「二線 CSP（如 CoreWeave
+等）」與企業客戶。第一季底 1,316 億元的龐大存貨主要為 Blackwell
+架構伺服器的備料，而非滯銷存貨，下半年產能較去年翻倍的全球布局（美、台、馬、印、巴）將提供出貨動能。</p>
+<h3 id="經營層語意解讀-earnings-call-nlp">② 經營層語意解讀 (Earnings
+Call NLP)</h3>
+<p>5 月 15 日法說會中，經營層對 2026 全年營運展現了極強的信心，指出 AI
+伺服器業務將維持「三位數成長」，帶動 2026 營收突破 5,000
+億元大關。第一季毛利率為 12.01%，經營層預期將持續透過高階產品（如 DLC
+液冷解決方案）的產品組合優化，來持穩毛利率在雙位數以上水準。</p>
+<h3 id="籌碼與衍生性商品驗證-derivatives-flows">③ 籌碼與衍生性商品驗證
+(Derivatives &amp; Flows)</h3>
+<ul>
+<li><strong>海外募資</strong>：發行美元 ECB
+進行外幣原料採購。週級別大戶持股高達 64.16%。</li>
+<li><strong>籌碼沈澱</strong>：近五日融資水位大幅降低 1,716
+張，融券亦下滑，顯示短線散戶投機客與浮額已被有效清洗。三大法人近五日合計雖賣超
+366 萬股（主要是外資與自營避險調節，投信仍大舉買超 321 萬股），但 5/22
+單日外資已重新回補 217 萬股，籌碼面有止跌築底跡象。</li>
+</ul>
+<h3 id="宏觀因子與匯率敏感度-macro-pricing">④ 宏觀因子與匯率敏感度
+(Macro Pricing)</h3>
+<p>美元維持 31.45 的相對強勢，對其外銷伺服器事業有顯著利多。低 Beta
+特性也使其在美債殖利率維持高檔（4.57%）時具有較強的估值抗跌性。</p>
+<h3 id="天催化劑矩陣-dynamic-catalyst-tracking">⑤ 90天催化劑矩陣
+(Dynamic Catalyst Tracking)</h3>
+<ol type="1">
+<li><strong>COMPUTEX 2026 (6月上旬)</strong>：技嘉以 AI
+基礎設施為展示焦點，預期發表 Blackwell (GB300 NVL4) 伺服器與 DLC
+液冷新品。</li>
+<li><strong>股利配發 (6-7月)</strong>：擬配發 12
+元現金股利，殖利率提供下檔防線。</li>
+<li><strong>美國產能交付 (6月底)</strong>：美國生產線如期於第 2
+季底交付，營收將實質反映產能開出。</li>
+<li><strong>土城新廠完工 (Q3)</strong>：新廠預計第 3
+季完工投產，伺服器產能倍增計畫進入實質放量期。</li>
+</ol>
+<h3 id="共識目標價去極端值-consensus-target-price">⑥ 共識目標價去極端值
+(Consensus Target Price)</h3>
+<p>大和資本評等買進並調升目標價至 <strong>$422</strong>，元富投顧看
+<strong>$390</strong>，大摩維持中立看
+<strong>$375</strong>。主流法人共識目標價中位數落在 <strong>$390 -
+$410</strong> 區間。</p>
+<hr />
+<h2 id="risks-contrarian-sentiment-風險與反向觀點">4. Risks &amp;
+Contrarian Sentiment (風險與反向觀點)</h2>
+<h3 id="a.-反向多空假說">A. 反向多空假說</h3>
+<ul>
+<li><strong>Bear Case (利空反向假說)</strong>：若下半年二線 CSP
+業者因融資成本過高或客戶流失而放緩資本支出，將導致技嘉伺服器毛利率跌破
+10% 關卡，第一季的 EPS 7.86 元將成為全年頂點，全年 EPS 恐回落至 25
+元附近。</li>
+<li><strong>Bull Case (利多反向假說)</strong>：技嘉因 DLC
+液冷方案極佳的性價比，除穩拿二線 CSP 外，順利奪下美系一線 CSP 的 GB300
+DLC 直供訂單。下半年產能較去年翻倍完全被市場消化，全年 EPS 衝破 35
+元，股價挑戰 500 元以上。</li>
+</ul>
+<h3 id="b.-關鍵破壞投資邏輯觸發條件-key-risk-triggers">B.
+關鍵破壞投資邏輯觸發條件 (Key Risk Triggers)</h3>
+<ol type="1">
+<li><strong>伺服器毛利率低於 10%</strong>：若季報毛利率連續兩季低於
+10.0%。</li>
+<li><strong>存貨周轉天數拉長 30% 以上</strong>：若備料 1,316
+億元存貨周轉效率下滑。</li>
+<li><strong>美國/土城產能開出延遲</strong>：若產能無法於 Q3
+如期翻倍放量。</li>
+<li><strong>USD/TWD 匯率跌破
+30.00</strong>：台幣大幅升值造成代工利潤釋與重大匯損。</li>
+</ol>
+<hr />
+<p><em>本報告僅供專業投資參考，不構成個股推薦。投資人應自行評估市場風險。</em></p>
+
+        </article>
+    </div>
+    <script>
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("progressBar").style.width = scrolled + "%";
+        };
+    </script>
+</body>
+</html>

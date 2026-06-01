@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>金像電 (2368) 專業級投資分析報告</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0f17;
+            --container-bg: rgba(22, 27, 34, 0.4);
+            --border-color: rgba(255, 255, 255, 0.06);
+            --text-primary: #f0f6fc;
+            --text-secondary: #8b949e;
+            --accent: #58a6ff;
+            --accent-grad: linear-gradient(135deg, #58a6ff 0%, #bc8cff 100%);
+            --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(88, 166, 255, 0.05) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(188, 140, 255, 0.05) 0px, transparent 50%);
+            color: var(--text-primary);
+            font-family: 'Outfit', 'Noto Sans TC', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 850px;
+            padding: 50px 24px 100px 24px;
+            position: relative;
+        }
+        
+        /* 懸浮返回按鈕 */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-bottom: 40px;
+            padding: 10px 20px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            backdrop-filter: blur(12px);
+        }
+        
+        .back-btn:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.07);
+            transform: translateX(-6px);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* 報告頁首 */
+        .report-header {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 28px;
+            margin-bottom: 40px;
+        }
+        
+        .report-meta {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+        
+        .meta-tag {
+            padding: 6px 14px;
+            border-radius: 20px;
+            background: rgba(88, 166, 255, 0.08);
+            color: var(--accent);
+            border: 1px solid rgba(88, 166, 255, 0.15);
+            font-family: 'Outfit', sans-serif;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .meta-tag.date {
+            background: rgba(188, 140, 255, 0.08);
+            color: #bc8cff;
+            border: 1px solid rgba(188, 140, 255, 0.15);
+        }
+        
+        /* 內文樣式排版 */
+        .report-content {
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            color: #c9d1d9;
+        }
+        
+        .report-content h1 {
+            font-family: 'Outfit', 'Noto Sans TC', sans-serif;
+            font-size: 2.4rem;
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 20px;
+            background: var(--accent-grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.3;
+        }
+        
+        .report-content h2 {
+            font-size: 1.65rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-top: 48px;
+            margin-bottom: 20px;
+            color: #ffffff;
+            font-weight: 600;
+        }
+        
+        .report-content h3 {
+            font-size: 1.3rem;
+            margin-top: 36px;
+            margin-bottom: 16px;
+            color: #e6edf3;
+            font-weight: 600;
+        }
+        
+        .report-content p {
+            margin-bottom: 28px;
+            text-align: justify;
+        }
+        
+        .report-content strong {
+            color: #ffffff;
+            font-weight: 600;
+        }
+        
+        .report-content ul, .report-content ol {
+            padding-left: 24px;
+            margin-bottom: 28px;
+        }
+        
+        .report-content li {
+            margin-bottom: 10px;
+        }
+        
+        /* 專業表格美化 */
+        .report-content table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 36px 0;
+            font-size: 0.95rem;
+            background: rgba(22, 27, 34, 0.5);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+        }
+        
+        .report-content th, .report-content td {
+            padding: 14px 18px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .report-content th {
+            background-color: rgba(255, 255, 255, 0.03);
+            font-weight: 600;
+            color: #ffffff;
+            font-family: 'Outfit', 'Noto Sans TC', sans-serif;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+        }
+        
+        .report-content tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .report-content tr:hover td {
+            background-color: rgba(255, 255, 255, 0.01);
+        }
+        
+        /* 區塊引言 */
+        .report-content blockquote {
+            margin: 32px 0;
+            padding: 12px 24px;
+            color: #8b949e;
+            border-left: 4px solid var(--accent);
+            background: rgba(88, 166, 255, 0.03);
+            border-radius: 0 12px 12px 0;
+            font-style: italic;
+        }
+        
+        .report-content blockquote p {
+            margin: 0;
+        }
+        
+        /* 行內與區塊程式碼 */
+        .report-content code {
+            font-family: 'Courier New', Courier, monospace;
+            padding: 3px 6px;
+            background-color: rgba(255, 255, 255, 0.08);
+            border-radius: 6px;
+            font-size: 0.9em;
+            color: #ff7b72;
+        }
+        
+        .report-content pre {
+            background: #161b22;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            overflow: auto;
+            margin: 32px 0;
+            box-shadow: var(--shadow);
+        }
+        
+        .report-content pre code {
+            background-color: transparent;
+            padding: 0;
+            font-size: 0.9rem;
+            color: #e6edf3;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        
+        /* 閱讀進度條 */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: var(--accent-grad);
+            width: 0%;
+            z-index: 100;
+            transition: width 0.1s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    <div class="container">
+        <a href="../index.html" class="back-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12" y1="19" x2="5" y2="12" x1="12" y1="5"></polyline></svg>
+            返回報告總覽
+        </a>
+        <article class="report-content">
+            <div class="report-header">
+                <h1>金像電 (2368) 專業級投資分析報告</h1>
+                <div class="report-meta">
+                    <span class="meta-tag date">
+                        <svg width="12" height="12" style="margin-right: 6px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        2026-06-01
+                    </span>
+                    <span class="meta-tag">代號 2368</span>
+                    <span class="meta-tag">金像電</span>
+                </div>
+            </div>
+            <h1 id="金像電-2368-專業級投資分析報告">金像電 (2368)
+專業級投資分析報告</h1>
+<blockquote>
+<p><strong>報告日期</strong>：2026-06-01<br />
+<strong>當前股價</strong>：$1325.00 (來源: FinMind (Adj))<br />
+<strong>評等建議</strong>：<strong>Buy (買進)</strong></p>
+</blockquote>
+<hr />
+<h2 id="投資摘要-executive-summary">1. 投資摘要 (Executive Summary)</h2>
+<p>金像電 (2368) 作為全球 AI 伺服器與高階網通 HLC 板龍頭，受惠於美系 AI
+伺服器建置熱潮，營運表現淡季不淡。法人共識預估 2026 年 EPS 可達 $37.43
+元 (Forward PE 僅 35.4x)，最新目標價共識上修至 <strong>$1585
+元</strong>。目前股價 $1325 元略低於法人合理共識區間 ($1350 - $1600 元)
+之下緣，且融資籌碼極為乾淨，<strong>具備良好的安全邊際，給予「買進」評等，目標價上看
+$1580 元。</strong></p>
+<hr />
+<h2 id="量化與估值矩陣-quant-valuation-matrix">2. 量化與估值矩陣 (Quant
+&amp; Valuation Matrix)</h2>
+<h3 id="財務與風險評分">2.1 財務與風險評分</h3>
+<ul>
+<li><strong>Piotroski F-Score</strong>: <strong>6 / 9</strong>
+(財務體質穩健)
+<ul>
+<li><em>通過指標</em>：ROA &gt; 0、CFO &gt; 0、Delta ROA &gt;
+0、Accrual、Delta Leverage &lt; 0、Delta Margin &gt; 0。</li>
+<li><em>未通過指標</em>：Delta Liquidity &gt; 0 (流動比率微降)、No EQ
+Issue (股本有些微變動)、Delta Turnover &gt; 0。</li>
+</ul></li>
+<li><strong>Altman Z”-Score</strong>: <strong>18.63</strong>
+(處於極度安全的綠色區間，破產機率為零)。</li>
+</ul>
+<h3 id="多情境-dcf-估值-table">2.2 多情境 DCF 估值 Table</h3>
+<p>基於 2026-06-01 動態無風險利率 <span
+class="math inline"><em>R</em><sub><em>f</em></sub> = 4.45%</span>，調整後個股
+Beta = 1.10，Ke = 11.05%，WACC (Base) = 9.50%。 * <strong>最大預期回撤
+(VaR)</strong>：1-Day VaR = <strong>6.65%</strong>，5-Day VaR =
+<strong>14.87%</strong>。</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">情境</th>
+<th style="text-align: left;">假設條件</th>
+<th style="text-align: left;">估值參數</th>
+<th style="text-align: left;">目標價</th>
+<th style="text-align: left;">潛在空間</th>
+<th style="text-align: left;">評估說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Bull (樂觀)</strong></td>
+<td style="text-align: left;">泰國新廠產能快速開出</td>
+<td style="text-align: left;">WACC=8.50%, g=20.0%</td>
+<td style="text-align: left;"><strong>$779.45</strong></td>
+<td style="text-align: left;"><strong>-41.17%</strong></td>
+<td style="text-align: left;">傳統歷史 DCF 未完全反映 high-layer
+溢價</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Base (基本)</strong></td>
+<td style="text-align: left;">AI 伺服器需求穩定</td>
+<td style="text-align: left;">WACC=9.50%, g=15.0%</td>
+<td style="text-align: left;"><strong>$552.87</strong></td>
+<td style="text-align: left;"><strong>-58.27%</strong></td>
+<td style="text-align: left;">基於歷史 FCF 估計，與股價存在折價</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Bear (悲觀)</strong></td>
+<td style="text-align: left;">客戶砍價或產能利用率下滑</td>
+<td style="text-align: left;">WACC=10.50%, g=8.0%</td>
+<td style="text-align: left;"><strong>$383.65</strong></td>
+<td style="text-align: left;"><strong>-71.05%</strong></td>
+<td style="text-align: left;">競爭加劇，毛利率跌回 20% 水準</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>[!NOTE] <strong>DCF 估值與目前股價偏差之關鍵解讀：</strong><br />
+歷史 DCF 合理價僅 $552.87 元，但金像電在 AI
+伺服器主板的市占率極高，且高多層板 (HLC)
+具備技術壁壘，淨利潤率大幅改善。以 2026 預估 EPS $37.43 元計算，目前的
+<strong>Forward PE 僅 35.4x</strong>，在 AI
+純度極高的硬體股中估值相對便宜，具備補漲空間。</p>
+</blockquote>
+<hr />
+<h2 id="大-alpha-深入洞見-qualitative-insights">3. 6 大 Alpha 深入洞見
+(Qualitative Insights)</h2>
+<ul>
+<li><strong>產業連端</strong>：全球 AI 伺服器 PCB 主板與高階交換器板
+(HLC) 龍頭，泰國新廠已開出產能，有利於分散地緣政治風險。</li>
+<li><strong>經營層指引</strong>：管理層指引樂觀，預期高階產品組合比重拉升，毛利率將維持高檔。</li>
+<li><strong>籌碼與資金</strong>：近五日三大法人合計買超 840
+張。千張大股東持股 70.30%。融資餘額僅 4,529 張，籌碼結構非常乾淨。</li>
+<li><strong>共識目標價</strong>：法人最新目標價為 <strong>$1585
+元</strong>，目前股價 $1325 元仍有約 <strong>20%
+的上行空間</strong>。</li>
+</ul>
+<hr />
+<h2 id="風險與反向觀點-risk-factors">4. 風險與反向觀點 (Risk
+Factors)</h2>
+<ul>
+<li><strong>核心風險</strong>：需關注泰國新廠的良率爬坡速度，若開出初期折舊與不良率偏高，可能拖累短期毛利率。</li>
+<li><strong>反向觀點 (利多假說)</strong>：若新一代 AI
+伺服器需求超預期放量，2026 年 EPS 有望超越 $37.43 元挑戰 $40
+元以上，觸發估值上修。</li>
+</ul>
+
+        </article>
+    </div>
+    <script>
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("progressBar").style.width = scrolled + "%";
+        };
+    </script>
+</body>
+</html>
