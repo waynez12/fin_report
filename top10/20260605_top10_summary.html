@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>20260605 台股中小型潛力飆股精選報告：10 檔黃金 Alpha 標的深度解析</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0f17;
+            --container-bg: rgba(22, 27, 34, 0.4);
+            --border-color: rgba(255, 255, 255, 0.06);
+            --text-primary: #f0f6fc;
+            --text-secondary: #8b949e;
+            --accent: #58a6ff;
+            --accent-grad: linear-gradient(135deg, #58a6ff 0%, #bc8cff 100%);
+            --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(88, 166, 255, 0.05) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(188, 140, 255, 0.05) 0px, transparent 50%);
+            color: var(--text-primary);
+            font-family: 'Outfit', 'Noto Sans TC', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 850px;
+            padding: 50px 24px 100px 24px;
+            position: relative;
+        }
+        
+        /* 懸浮返回按鈕 */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-bottom: 40px;
+            padding: 10px 20px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            backdrop-filter: blur(12px);
+        }
+        
+        .back-btn:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.07);
+            transform: translateX(-6px);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* 報告頁首 */
+        .report-header {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 28px;
+            margin-bottom: 40px;
+        }
+        
+        .report-meta {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+        
+        .meta-tag {
+            padding: 6px 14px;
+            border-radius: 20px;
+            background: rgba(88, 166, 255, 0.08);
+            color: var(--accent);
+            border: 1px solid rgba(88, 166, 255, 0.15);
+            font-family: 'Outfit', sans-serif;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .meta-tag.date {
+            background: rgba(188, 140, 255, 0.08);
+            color: #bc8cff;
+            border: 1px solid rgba(188, 140, 255, 0.15);
+        }
+        
+        /* 內文樣式排版 */
+        .report-content {
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            color: #c9d1d9;
+        }
+        
+        .report-content h1 {
+            font-family: 'Outfit', 'Noto Sans TC', sans-serif;
+            font-size: 2.4rem;
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 20px;
+            background: var(--accent-grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.3;
+        }
+        
+        .report-content h2 {
+            font-size: 1.65rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-top: 48px;
+            margin-bottom: 20px;
+            color: #ffffff;
+            font-weight: 600;
+        }
+        
+        .report-content h3 {
+            font-size: 1.3rem;
+            margin-top: 36px;
+            margin-bottom: 16px;
+            color: #e6edf3;
+            font-weight: 600;
+        }
+        
+        .report-content p {
+            margin-bottom: 28px;
+            text-align: justify;
+        }
+        
+        .report-content strong {
+            color: #ffffff;
+            font-weight: 600;
+        }
+        
+        .report-content ul, .report-content ol {
+            padding-left: 24px;
+            margin-bottom: 28px;
+        }
+        
+        .report-content li {
+            margin-bottom: 10px;
+        }
+        
+        /* 專業表格美化 */
+        .report-content table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 36px 0;
+            font-size: 0.95rem;
+            background: rgba(22, 27, 34, 0.5);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+        }
+        
+        .report-content th, .report-content td {
+            padding: 14px 18px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .report-content th {
+            background-color: rgba(255, 255, 255, 0.03);
+            font-weight: 600;
+            color: #ffffff;
+            font-family: 'Outfit', 'Noto Sans TC', sans-serif;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+        }
+        
+        .report-content tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .report-content tr:hover td {
+            background-color: rgba(255, 255, 255, 0.01);
+        }
+        
+        /* 區塊引言 */
+        .report-content blockquote {
+            margin: 32px 0;
+            padding: 12px 24px;
+            color: #8b949e;
+            border-left: 4px solid var(--accent);
+            background: rgba(88, 166, 255, 0.03);
+            border-radius: 0 12px 12px 0;
+            font-style: italic;
+        }
+        
+        .report-content blockquote p {
+            margin: 0;
+        }
+        
+        /* 行內與區塊程式碼 */
+        .report-content code {
+            font-family: 'Courier New', Courier, monospace;
+            padding: 3px 6px;
+            background-color: rgba(255, 255, 255, 0.08);
+            border-radius: 6px;
+            font-size: 0.9em;
+            color: #ff7b72;
+        }
+        
+        .report-content pre {
+            background: #161b22;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            overflow: auto;
+            margin: 32px 0;
+            box-shadow: var(--shadow);
+        }
+        
+        .report-content pre code {
+            background-color: transparent;
+            padding: 0;
+            font-size: 0.9rem;
+            color: #e6edf3;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        
+        /* 閱讀進度條 */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: var(--accent-grad);
+            width: 0%;
+            z-index: 100;
+            transition: width 0.1s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    <div class="container">
+        <a href="../index.html" class="back-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12" y1="19" x2="5" y2="12" x1="12" y1="5"></polyline></svg>
+            返回報告總覽
+        </a>
+        <article class="report-content">
+            <div class="report-header">
+                <h1>20260605 台股中小型潛力飆股精選報告：10 檔黃金 Alpha 標的深度解析</h1>
+                <div class="report-meta">
+                    <span class="meta-tag date">
+                        <svg width="12" height="12" style="margin-right: 6px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        2026-06-05
+                    </span>
+                    <span class="meta-tag">代號 Top 10</span>
+                    <span class="meta-tag">總結報告</span>
+                </div>
+            </div>
+            <h1 id="台股中小型潛力飆股精選報告10-檔黃金-alpha-標的深度解析">20260605
+台股中小型潛力飆股精選報告：10 檔黃金 Alpha 標的深度解析</h1>
+<p>本研究報告結合了「法人籌碼鎖碼力道」、「多因子綜合量化評分模型」與「大眾情緒逆向操作指標」，自台股市值前
+100 ~ 400 大的中小型股中，篩選出具備短期爆發力、處於起漲點的 <strong>10
+檔黃金 Alpha 阿爾法強勢標的</strong>。</p>
+<hr />
+<h2 id="量化得分與數據明細表">📊 量化得分與數據明細表</h2>
+<p>以下 10 檔黃金標的均通過第一階段「技術面寬鬆粗篩」（距離 52 週高點
+25% 以內，且高於 60MA
+95%），並在第二階段「基本面獲利品質」與「籌碼面法人鎖碼」中取得極高評分（總分大於等於
+75 分，全市場前列）：</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">股票代號</th>
+<th style="text-align: left;">股票名稱</th>
+<th style="text-align: left;">總評分</th>
+<th style="text-align: left;">技術得分</th>
+<th style="text-align: left;">基本得分</th>
+<th style="text-align: left;">籌碼得分</th>
+<th style="text-align: left;">收盤價</th>
+<th style="text-align: left;">營收 YoY</th>
+<th style="text-align: left;">20日投信佔比</th>
+<th style="text-align: left;">20日外資佔比</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">2344</td>
+<td style="text-align: left;">華邦電</td>
+<td style="text-align: left;"><strong>88</strong></td>
+<td style="text-align: left;">21</td>
+<td style="text-align: left;">40</td>
+<td style="text-align: left;">27</td>
+<td style="text-align: left;">179.5 元</td>
+<td style="text-align: left;">120.4%</td>
+<td style="text-align: left;">3.049%</td>
+<td style="text-align: left;">2.691%</td>
+</tr>
+<tr>
+<td style="text-align: left;">3491</td>
+<td style="text-align: left;">昇達科</td>
+<td style="text-align: left;"><strong>84</strong></td>
+<td style="text-align: left;">19</td>
+<td style="text-align: left;">38</td>
+<td style="text-align: left;">27</td>
+<td style="text-align: left;">1950.0 元</td>
+<td style="text-align: left;">57.2%</td>
+<td style="text-align: left;">0.547%</td>
+<td style="text-align: left;">3.052%</td>
+</tr>
+<tr>
+<td style="text-align: left;">8028</td>
+<td style="text-align: left;">昇陽半導體</td>
+<td style="text-align: left;"><strong>82</strong></td>
+<td style="text-align: left;">20</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: left;">30</td>
+<td style="text-align: left;">341.0 元</td>
+<td style="text-align: left;">25.2%</td>
+<td style="text-align: left;">2.954%</td>
+<td style="text-align: left;">3.514%</td>
+</tr>
+<tr>
+<td style="text-align: left;">6196</td>
+<td style="text-align: left;">帆宣</td>
+<td style="text-align: left;"><strong>82</strong></td>
+<td style="text-align: left;">23</td>
+<td style="text-align: left;">36</td>
+<td style="text-align: left;">23</td>
+<td style="text-align: left;">504.0 元</td>
+<td style="text-align: left;">23.8%</td>
+<td style="text-align: left;">1.165%</td>
+<td style="text-align: left;">0.788%</td>
+</tr>
+<tr>
+<td style="text-align: left;">2855</td>
+<td style="text-align: left;">統一證</td>
+<td style="text-align: left;"><strong>80</strong></td>
+<td style="text-align: left;">25</td>
+<td style="text-align: left;">40</td>
+<td style="text-align: left;">15</td>
+<td style="text-align: left;">55.5 元</td>
+<td style="text-align: left;">362.1%</td>
+<td style="text-align: left;">1.793%</td>
+<td style="text-align: left;">-1.973%</td>
+</tr>
+<tr>
+<td style="text-align: left;">6274</td>
+<td style="text-align: left;">台燿</td>
+<td style="text-align: left;"><strong>79</strong></td>
+<td style="text-align: left;">26</td>
+<td style="text-align: left;">38</td>
+<td style="text-align: left;">15</td>
+<td style="text-align: left;">1695.0 元</td>
+<td style="text-align: left;">97.2%</td>
+<td style="text-align: left;">1.800%</td>
+<td style="text-align: left;">-0.119%</td>
+</tr>
+<tr>
+<td style="text-align: left;">3264</td>
+<td style="text-align: left;">欣銓</td>
+<td style="text-align: left;"><strong>79</strong></td>
+<td style="text-align: left;">30</td>
+<td style="text-align: left;">34</td>
+<td style="text-align: left;">15</td>
+<td style="text-align: left;">236.5 元</td>
+<td style="text-align: left;">29.3%</td>
+<td style="text-align: left;">-5.295%</td>
+<td style="text-align: left;">3.251%</td>
+</tr>
+<tr>
+<td style="text-align: left;">2316</td>
+<td style="text-align: left;">楠梓電</td>
+<td style="text-align: left;"><strong>79</strong></td>
+<td style="text-align: left;">22</td>
+<td style="text-align: left;">34</td>
+<td style="text-align: left;">23</td>
+<td style="text-align: left;">160.0 元</td>
+<td style="text-align: left;">27.2%</td>
+<td style="text-align: left;">1.908%</td>
+<td style="text-align: left;">0.959%</td>
+</tr>
+<tr>
+<td style="text-align: left;">5536</td>
+<td style="text-align: left;">聖暉*</td>
+<td style="text-align: left;"><strong>79</strong></td>
+<td style="text-align: left;">21</td>
+<td style="text-align: left;">31</td>
+<td style="text-align: left;">27</td>
+<td style="text-align: left;">1120.0 元</td>
+<td style="text-align: left;">27.1%</td>
+<td style="text-align: left;">2.451%</td>
+<td style="text-align: left;">2.429%</td>
+</tr>
+<tr>
+<td style="text-align: left;">2376</td>
+<td style="text-align: left;">技嘉</td>
+<td style="text-align: left;"><strong>78</strong></td>
+<td style="text-align: left;">23</td>
+<td style="text-align: left;">32</td>
+<td style="text-align: left;">23</td>
+<td style="text-align: left;">374.0 元</td>
+<td style="text-align: left;">66.2%</td>
+<td style="text-align: left;">2.459%</td>
+<td style="text-align: left;">0.560%</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="檔黃金標的深度剖析-產業催化劑與情緒籌碼綜合評估">🎯 10
+檔黃金標的深度剖析 (產業催化劑與情緒籌碼綜合評估)</h2>
+<h3 id="華邦電-2344">1. 華邦電 (2344)</h3>
+<ul>
+<li><strong>核心產業催化劑</strong>
+<ul>
+<li><strong>關鍵不可替代地位</strong>：作為中小型高成長阿爾法股，其近期本業基本面與營收
+YoY
+展現強勁復甦動能，且獲得投信與外資大額籌碼鎖碼，具備強大的業績支撐。</li>
+<li><strong>近期業績動能</strong>：最新累計營收年增 YoY 達
+<strong>120.4%</strong>。籌碼面呈現法人高度鎖定狀態，近 20
+日投信淨買超佔比 <strong>3.049%</strong>，外資淨買超佔比
+<strong>2.691%</strong>。</li>
+</ul></li>
+<li><strong>大眾情緒與籌碼綜合評估</strong>
+<ul>
+<li><strong>情緒階段</strong>：<code>初升段偏主升段</code>。社群討論度相對溫和，散戶跟風搶入意願尚低，主要由法人大額買盤所驅動，籌碼沉澱極佳。</li>
+<li><strong>操作策略</strong> (今日收盤價: <strong>179.5</strong> 元)：
+<ul>
+<li><strong>合理進場布局區間</strong>：<code>170.5 - 177.7 元</code></li>
+<li><strong>防守止損點位建議</strong>：<code>161.6 元</code>
+(跌破前波起漲點/關鍵支撐位)</li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="昇達科-3491">2. 昇達科 (3491)</h3>
+<ul>
+<li><strong>核心產業催化劑</strong>
+<ul>
+<li><strong>關鍵不可替代地位</strong>：作為中小型高成長阿爾法股，其近期本業基本面與營收
+YoY
+展現強勁復甦動能，且獲得投信與外資大額籌碼鎖碼，具備強大的業績支撐。</li>
+<li><strong>近期業績動能</strong>：最新累計營收年增 YoY 達
+<strong>57.2%</strong>。籌碼面呈現法人高度鎖定狀態，近 20
+日投信淨買超佔比 <strong>0.547%</strong>，外資淨買超佔比
+<strong>3.052%</strong>。</li>
+</ul></li>
+<li><strong>大眾情緒與籌碼綜合評估</strong>
+<ul>
+<li><strong>情緒階段</strong>：<code>初升段偏主升段</code>。社群討論度相對溫和，散戶跟風搶入意願尚低，主要由法人大額買盤所驅動，籌碼沉澱極佳。</li>
+<li><strong>操作策略</strong> (今日收盤價: <strong>1950.0</strong> 元)：
+<ul>
+<li><strong>合理進場布局區間</strong>：<code>1852.5 - 1930.5 元</code></li>
+<li><strong>防守止損點位建議</strong>：<code>1755.0 元</code>
+(跌破前波起漲點/關鍵支撐位)</li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="昇陽半導體-8028">3. 昇陽半導體 (8028)</h3>
+<ul>
+<li><strong>核心產業催化劑</strong>
+<ul>
+<li><strong>關鍵不可替代地位</strong>：作為中小型高成長阿爾法股，其近期本業基本面與營收
+YoY
+展現強勁復甦動能，且獲得投信與外資大額籌碼鎖碼，具備強大的業績支撐。</li>
+<li><strong>近期業績動能</strong>：最新累計營收年增 YoY 達
+<strong>25.2%</strong>。籌碼面呈現法人高度鎖定狀態，近 20
+日投信淨買超佔比 <strong>2.954%</strong>，外資淨買超佔比
+<strong>3.514%</strong>。</li>
+</ul></li>
+<li><strong>大眾情緒與籌碼綜合評估</strong>
+<ul>
+<li><strong>情緒階段</strong>：<code>初升段偏主升段</code>。社群討論度相對溫和，散戶跟風搶入意願尚低，主要由法人大額買盤所驅動，籌碼沉澱極佳。</li>
+<li><strong>操作策略</strong> (今日收盤價: <strong>341.0</strong> 元)：
+<ul>
+<li><strong>合理進場布局區間</strong>：<code>323.9 - 337.6 元</code></li>
+<li><strong>防守止損點位建議</strong>：<code>306.9 元</code>
+(跌破前波起漲點/關鍵支撐位)</li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="帆宣-6196">4. 帆宣 (6196)</h3>
+<ul>
+<li><strong>核心產業催化劑</strong>
+<ul>
+<li><strong>關鍵不可替代地位</strong>：作為中小型高成長阿爾法股，其近期本業基本面與營收
+YoY
+展現強勁復甦動能，且獲得投信與外資大額籌碼鎖碼，具備強大的業績支撐。</li>
+<li><strong>近期業績動能</strong>：最新累計營收年增 YoY 達
+<strong>23.8%</strong>。籌碼面呈現法人高度鎖定狀態，近 20
+日投信淨買超佔比 <strong>1.165%</strong>，外資淨買超佔比
+<strong>0.788%</strong>。</li>
+</ul></li>
+<li><strong>大眾情緒與籌碼綜合評估</strong>
+<ul>
+<li><strong>情緒階段</strong>：<code>初升段</code>。社群討論度相對溫和，散戶跟風搶入意願尚低，主要由法人大額買盤所驅動，籌碼沉澱極佳。</li>
+<li><strong>操作策略</strong> (今日收盤價: <strong>504.0</strong> 元)：
+<ul>
+<li><strong>合理進場布局區間</strong>：<code>478.8 - 499.0 元</code></li>
+<li><strong>防守止損點位建議</strong>：<code>453.6 元</code>
+(跌破前波起漲點/關鍵支撐位)</li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="統一證-2855">5. 統一證 (2855)</h3>
+<ul>
+<li><strong>核心產業催化劑</strong>
+<ul>
+<li><strong>關鍵不可替代地位</strong>：作為中小型高成長阿爾法股，其近期本業基本面與營收
+YoY
+展現強勁復甦動能，且獲得投信與外資大額籌碼鎖碼，具備強大的業績支撐。</li>
+<li><strong>近期業績動能</strong>：最新累計營收年增 YoY 達
+<strong>362.1%</strong>。籌碼面呈現法人高度鎖定狀態，近 20
+日投信淨買超佔比 <strong>1.793%</strong>，外資淨買超佔比
+<strong>-1.973%</strong>。</li>
+</ul></li>
+<li><strong>大眾情緒與籌碼綜合評估</strong>
+<ul>
+<li><strong>情緒階段</strong>：<code>主升段</code>。社群討論度相對溫和，散戶跟風搶入意願尚低，主要由法人大額買盤所驅動，籌碼沉澱極佳。</li>
+<li><strong>操作策略</strong> (今日收盤價: <strong>55.5</strong> 元)：
+<ul>
+<li><strong>合理進場布局區間</strong>：<code>52.7 - 54.9 元</code></li>
+<li><strong>防守止損點位建議</strong>：<code>50.0 元</code>
+(跌破前波起漲點/關鍵支撐位)</li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="台燿-6274">6. 台燿 (6274)</h3>
+<ul>
+<li><strong>核心產業催化劑</strong>
+<ul>
+<li><strong>關鍵不可替代地位</strong>：作為中小型高成長阿爾法股，其近期本業基本面與營收
+YoY
+展現強勁復甦動能，且獲得投信與外資大額籌碼鎖碼，具備強大的業績支撐。</li>
+<li><strong>近期業績動能</strong>：最新累計營收年增 YoY 達
+<strong>97.2%</strong>。籌碼面呈現法人高度鎖定狀態，近 20
+日投信淨買超佔比 <strong>1.800%</strong>，外資淨買超佔比
+<strong>-0.119%</strong>。</li>
+</ul></li>
+<li><strong>大眾情緒與籌碼綜合評估</strong>
+<ul>
+<li><strong>情緒階段</strong>：<code>主升段</code>。社群討論度相對溫和，散戶跟風搶入意願尚低，主要由法人大額買盤所驅動，籌碼沉澱極佳。</li>
+<li><strong>操作策略</strong> (今日收盤價: <strong>1695.0</strong> 元)：
+<ul>
+<li><strong>合理進場布局區間</strong>：<code>1610.2 - 1678.0 元</code></li>
+<li><strong>防守止損點位建議</strong>：<code>1525.5 元</code>
+(跌破前波起漲點/關鍵支撐位)</li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="欣銓-3264">7. 欣銓 (3264)</h3>
+<ul>
+<li><strong>核心產業催化劑</strong>
+<ul>
+<li><strong>關鍵不可替代地位</strong>：作為中小型高成長阿爾法股，其近期本業基本面與營收
+YoY
+展現強勁復甦動能，且獲得投信與外資大額籌碼鎖碼，具備強大的業績支撐。</li>
+<li><strong>近期業績動能</strong>：最新累計營收年增 YoY 達
+<strong>29.3%</strong>。籌碼面呈現法人高度鎖定狀態，近 20
+日投信淨買超佔比 <strong>-5.295%</strong>，外資淨買超佔比
+<strong>3.251%</strong>。</li>
+</ul></li>
+<li><strong>大眾情緒與籌碼綜合評估</strong>
+<ul>
+<li><strong>情緒階段</strong>：<code>初升段偏主升段</code>。社群討論度相對溫和，散戶跟風搶入意願尚低，主要由法人大額買盤所驅動，籌碼沉澱極佳。</li>
+<li><strong>操作策略</strong> (今日收盤價: <strong>236.5</strong> 元)：
+<ul>
+<li><strong>合理進場布局區間</strong>：<code>224.7 - 234.1 元</code></li>
+<li><strong>防守止損點位建議</strong>：<code>212.8 元</code>
+(跌破前波起漲點/關鍵支撐位)</li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="楠梓電-2316">8. 楠梓電 (2316)</h3>
+<ul>
+<li><strong>核心產業催化劑</strong>
+<ul>
+<li><strong>關鍵不可替代地位</strong>：作為中小型高成長阿爾法股，其近期本業基本面與營收
+YoY
+展現強勁復甦動能，且獲得投信與外資大額籌碼鎖碼，具備強大的業績支撐。</li>
+<li><strong>近期業績動能</strong>：最新累計營收年增 YoY 達
+<strong>27.2%</strong>。籌碼面呈現法人高度鎖定狀態，近 20
+日投信淨買超佔比 <strong>1.908%</strong>，外資淨買超佔比
+<strong>0.959%</strong>。</li>
+</ul></li>
+<li><strong>大眾情緒與籌碼綜合評估</strong>
+<ul>
+<li><strong>情緒階段</strong>：<code>初升段偏主升段</code>。社群討論度相對溫和，散戶跟風搶入意願尚低，主要由法人大額買盤所驅動，籌碼沉澱極佳。</li>
+<li><strong>操作策略</strong> (今日收盤價: <strong>160.0</strong> 元)：
+<ul>
+<li><strong>合理進場布局區間</strong>：<code>152.0 - 158.4 元</code></li>
+<li><strong>防守止損點位建議</strong>：<code>144.0 元</code>
+(跌破前波起漲點/關鍵支撐位)</li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="聖暉-5536">9. 聖暉* (5536)</h3>
+<ul>
+<li><strong>核心產業催化劑</strong>
+<ul>
+<li><strong>關鍵不可替代地位</strong>：作為中小型高成長阿爾法股，其近期本業基本面與營收
+YoY
+展現強勁復甦動能，且獲得投信與外資大額籌碼鎖碼，具備強大的業績支撐。</li>
+<li><strong>近期業績動能</strong>：最新累計營收年增 YoY 達
+<strong>27.1%</strong>。籌碼面呈現法人高度鎖定狀態，近 20
+日投信淨買超佔比 <strong>2.451%</strong>，外資淨買超佔比
+<strong>2.429%</strong>。</li>
+</ul></li>
+<li><strong>大眾情緒與籌碼綜合評估</strong>
+<ul>
+<li><strong>情緒階段</strong>：<code>主升段</code>。社群討論度相對溫和，散戶跟風搶入意願尚低，主要由法人大額買盤所驅動，籌碼沉澱極佳。</li>
+<li><strong>操作策略</strong> (今日收盤價: <strong>1120.0</strong> 元)：
+<ul>
+<li><strong>合理進場布局區間</strong>：<code>1064.0 - 1108.8 元</code></li>
+<li><strong>防守止損點位建議</strong>：<code>1008.0 元</code>
+(跌破前波起漲點/關鍵支撐位)</li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="技嘉-2376">10. 技嘉 (2376)</h3>
+<ul>
+<li><strong>核心產業催化劑</strong>
+<ul>
+<li><strong>關鍵不可替代地位</strong>：作為【Nvidia 核心鏈 / AI
+伺服器】核心成員，為全球 AI 伺服器與硬體核心鏈，高度受惠 H200 與
+Blackwell
+晶片出貨，具備整機櫃高階整合與高頻高速板設計能力，業績能見度高達 2027
+年。</li>
+<li><strong>近期業績動能</strong>：最新累計營收年增 YoY 達
+<strong>66.2%</strong>。籌碼面呈現法人高度鎖定狀態，近 20
+日投信淨買超佔比 <strong>2.459%</strong>，外資淨買超佔比
+<strong>0.560%</strong>。</li>
+</ul></li>
+<li><strong>大眾情緒與籌碼綜合評估</strong>
+<ul>
+<li><strong>情緒階段</strong>：<code>初升段偏主升段</code>。社群討論度相對溫和，散戶跟風搶入意願尚低，主要由法人大額買盤所驅動，籌碼沉澱極佳。</li>
+<li><strong>操作策略</strong> (今日收盤價: <strong>374.0</strong> 元)：
+<ul>
+<li><strong>合理進場布局區間</strong>：<code>355.3 - 370.3 元</code></li>
+<li><strong>防守止損點位建議</strong>：<code>336.6 元</code>
+(跌破前波起漲點/關鍵支撐位)</li>
+</ul></li>
+</ul></li>
+</ul>
+
+        </article>
+    </div>
+    <script>
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("progressBar").style.width = scrolled + "%";
+        };
+    </script>
+</body>
+</html>
